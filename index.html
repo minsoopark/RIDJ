@@ -15,7 +15,7 @@
         return len > 0? new Array(len).join('0')+nr : nr;
       }
       $(function(){
-        $('.ridi-search-button').click(function(){
+        $('.ridi-search-button').on('click', function(){
           $(".ridi-songs-result").remove();
           
           var version = 1;
@@ -38,16 +38,34 @@
               var songName = songs[i].songName;
               var artistName = songs[i].artists.artist[0].artistName;
               var albumName = songs[i].albumName;
-              var playTime = Math.floor(songs[i].playTime / 60) + ":" + zeroPad(songs[i].playTime % 60, 10);
+              var playTime = songs[i].playTime;
               $(".ridi-songs-tbody").append(
                 "<tr class='ridi-songs-result'>" +
-                "<td class='mdl-data-table__cell--non-numeric'>" + songName +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric'>" + artistName +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric'>" + albumName +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric'>" + playTime +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric'><a href='#'>신청</a></td>" +
+                "<td class='mdl-data-table__cell--non-numeric' id='song-" + i + "'>" + songName +"</td>" +
+                "<td class='mdl-data-table__cell--non-numeric' id='artist-" + i + "'>" + artistName +"</td>" +
+                "<td class='mdl-data-table__cell--non-numeric' id='album-" + i + "'>" + albumName +"</td>" +
+                "<td class='mdl-data-table__cell--non-numeric' id='play-time-" + i + "'>" + playTime +"</td>" +
+                "<td class='mdl-data-table__cell--non-numeric'><button class='ridi-add-button mdl-button mdl-js-button mdl-button--icon mdl-button--accent' id='button-" + i + "'><i class='material-icons'>add</i></button></td>" +
                 "</tr>"
               );
+              $("#button-" + i).on('click', function(){
+                var index = this.id.replace('button-', '');
+                songName = $("#song-" + index).text();
+                artistName = $("#artist-" + index).text();
+                albumName = $("#album-" + index).text();
+                playTime = $("#play-time-" + index).text();
+
+                var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
+
+                $.ajax({
+                  url: "http://ridj.herokuapp.com/api/orders/new",
+                  dataType: "json",
+                  method: "POST",
+                  data: requestData,
+                }).done(function(data){
+                  alert("곡이 신청되었습니다.");
+                });
+              });
             }
           });
         });
