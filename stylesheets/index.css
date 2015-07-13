@@ -1,17 +1,3 @@
-.ridi-search-form {
-  width: 344px;
-  margin-left: 20px;
-}
-
-.ridi-songs-table {
-  display: none; position: absolute; left: 10px; top: 70px;
-  margin-left: auto; margin-right: auto;
-}
-
-.ridi-add-button {
-  margin-top: -6px;
-}
-
 .modal-spinner {
   width: 100%;
   height: 100%;
@@ -21,12 +7,64 @@
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 999;
 }
-
-.ridi-spinner {
-  top: 50%;
-  margin-top: -14px;
+.modal-spinner .ridi-spinner {
+  top: 50%; margin-top: -14px;
 }
 
-.structure_row{
+.searching_area {
+  width: 50%; margin: 0 auto;
+}
+.searching_area .ridi-search-form {
+  display: table; width: 100%; table-layout: fixed;
+  box-sizing: border-box;
+}
+.searching_area .ridi-search-form .search_input_wrap,
+.searching_area .ridi-search-form .search_button_wrap{
+  display: table-cell; 
+}
+.searching_area .ridi-search-form .search_input_wrap{
+  width: auto; padding: 10px 10px 10px 0;
+}
+.searching_area .ridi-search-form .search_input_wrap .ridi-search-field{
+  width: 100%; height: 35px; padding: 10px; box-sizing: border-box;
+  border-radius: 5px; border: 1px solid #e9e9e9;
+  font-size: 13px; color: #333;
+}
+.searching_area .ridi-search-form .search_button_wrap{
+  width: 50px; padding: 10px 0;
+  vertical-align: top;
+}
+.searching_area .ridi-search-form .search_button_wrap .ridi-search-button{
+  height: 35px; width: 50px; border-radius: 5px; cursor: pointer;
+  background: none; border: 1px solid #e9e9e9;
+}
+
+.searching_area .ridi-songs-table {
+  position: absolute; left: 10px; top: 70px;
+  margin-left: auto; margin-right: auto;
+}
+.searching_area .ridi-songs-table .ridi-add-button {
+  margin-top: -6px; cursor: pointer;
+}
+
+.result_area {
+  width: 50%; margin: 0 auto;
+}
+.result_area .added_list{
+  width: 100%; border-collapse: collapse;
+}
+.result_area .added_list th{
+  height: 50px; border-bottom: 2px solid #e9e9e9;
+}
+.result_area .added_list td{
+  text-align: center; height: 40px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.result_area .added_list .album_title,
+.result_area .added_list .song_title{
+  text-align: left;
+}
+
+.structure_row {
   display: none;
 }

@@ -16,7 +16,7 @@ function getList(){
         tmpRow.find('.album_title').html(data.orders[i].album);
         tmpRow.find('.song_title').html(data.orders[i].song);
         tmpRow.find('.artist').html(data.orders[i].artist);
-        tmpRow.find('.play_time').html();
+        tmpRow.find('.play_time').html(playTime);
         $('.added_list_body').append(tmpRow);
       };
     }
@@ -30,13 +30,8 @@ function calculateTime(time){
 
 function search() {
   $(".ridi-songs-tbody").find('tr:not(.structure_row)').remove();
-  $(".ridi-songs-table").show();
 
   var version = 1, page = 1, count = 10, searchKeyword = $(".ridi-search-field").val();
-
-  if(searchKeyword == ""){
-    $('.ridi-songs-table').hide();    
-  }
 
   $.ajax({
     url: "http://apis.skplanetx.com/melon/songs?version=" + version + "&page=" + page + "&count=" + count + "&searchKeyword=" + searchKeyword,
@@ -85,7 +80,6 @@ function search() {
         }).done(function (data) {
           $(".modal-spinner").css("display", "none");
           alert("곡이 신청되었습니다.");
-          $('.ridi-songs-table').hide();
           getList();
         });
       });

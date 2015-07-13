@@ -13,58 +13,69 @@
     <title>RIDI-J</title>
   </head>
   <body>
+    <!-- spinner -->
     <div class="modal-spinner">
       <div class="ridi-spinner mdl-spinner mdl-js-spinner is-active"></div>
     </div>
-    <div class="ridi-search-form">
-      <div class="mdl-textfield mdl-js-textfield">
-        <input class="ridi-search-field mdl-textfield__input" type="text" id="song" />
-        <label class="mdl-textfield__label" for="song">아티스트 혹은 곡 이름으로 검색..</label>
-      </div>
-      <button class="ridi-search-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
-        <i class="material-icons">search</i>
-      </button>
-    </div>
-    <table class="ridi-songs-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-      <thead>
-        <tr>
-          <th class="mdl-data-table__cell--non-numeric">곡</th>
-          <th class="mdl-data-table__cell--non-numeric">아티스트</th>
-          <th class="mdl-data-table__cell--non-numeric">앨범</th>
-          <th class="mdl-data-table__cell--non-numeric">재생시간</th>
-          <th class="mdl-data-table__cell--non-numeric">신청</th>
-        </tr>
-      </thead>
-      <tbody class="ridi-songs-tbody">
-        <tr class='ridi-songs-result structure_row'>
-          <td class='mdl-data-table__cell--non-numeric song_name'></td>
-          <td class='mdl-data-table__cell--non-numeric artist_name'></td>
-          <td class='mdl-data-table__cell--non-numeric album_name'></td>
-          <td class='mdl-data-table__cell--non-numeric play_time'></td>
-          <td class='mdl-data-table__cell--non-numeric'>
-            <button class='ridi-add-button mdl-button mdl-js-button mdl-button--icon mdl-button--accent'><i class='material-icons'>add</i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
 
-    <table class="added_list">
-      <thead>
-        <tr>
-          <th>곡앨범</th>
-          <th>곡명</th>
-          <th>아티스트</th>
-          <th>재생시간</th>
-        </tr>
-      </thead>
-      <tbody class="added_list_body">
-        <tr class="structure_row">
-          <td class="album_title"></td>
-          <td class="song_title"></td>
-          <td class="artist"></td>
-          <td class="play_time"></td>
-        </tr>
-      </tbody> 
-    </table>
+    <!-- searching_area -->
+    <div class="searching_area">
+      <div class="ridi-search-form">
+        <div class="search_input_wrap">
+          <input class="ridi-search-field" type="text" id="song" placeholder="아티스트 혹은 곡 이름으로 검색" />
+        </div>
+        <div class="search_button_wrap">
+          <button class="ridi-search-button">검색</button>
+        </div>
+      </div>
+      <table class="ridi-songs-table">
+        <thead>
+          <tr>
+            <th>곡</th>
+            <th>아티스트</th>
+            <th>앨범</th>
+            <th>재생시간</th>
+            <th>신청</th>
+          </tr>
+        </thead>
+        <tbody class="ridi-songs-tbody">
+          <tr class='ridi-songs-result structure_row'>
+            <td class='song_name'></td>
+            <td class='artist_name'></td>
+            <td class='album_name'></td>
+            <td class='play_time'></td>
+            <td>
+              <button class='ridi-add-button'><i class='material-icons'>add</i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="result_area">
+      <table class="added_list">
+        <thead>
+          <colgroup>
+            <col width="auto">
+            <col width="auto">
+            <col width="20%">
+            <col width="10%">
+          </colgroup>
+          <tr>
+            <th>곡명</th>
+            <th>곡앨범</th>
+            <th>아티스트</th>
+            <th>재생시간</th>
+          </tr>
+        </thead>
+        <tbody class="added_list_body">
+          <tr class="structure_row">
+            <td class="song_title"></td>
+            <td class="album_title"></td>
+            <td class="artist"></td>
+            <td class="play_time"></td>
+          </tr>
+        </tbody> 
+      </table>
+    </div>
   </body>
 </html>
