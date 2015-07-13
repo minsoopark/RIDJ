@@ -3,10 +3,32 @@ function zeroPad(nr, base) {
   return len > 0 ? (new Array(len).join('0') + nr) : nr;
 }
 
+function getList(){
+  $.ajax({
+    url: "http://ridj.herokuapp.com/orders",
+    success: function(data, structureRow) {
+      for(var i=0; i<data.orders.length; i++){
+        var playTime = Number(data.orders[i].play_time);
+        var tmpRow = $('.structure_row').clone().removeClass('structure_row');
+        tmpRow.find('.album_title').html(data.orders[i].album);
+        tmpRow.find('.song_title').html(data.orders[i].song);
+        tmpRow.find('.artist').html(data.orders[i].artist);
+        tmpRow.find('.play_time').html(parseInt(playTime/60) + "분 " + (playTime%60) + "초");
+        $('.added_list_body').append(tmpRow);
+      };
+    }
+  });
+}
+
 function search() {
   $(".ridi-songs-result").remove();
+  $('.ridi-songs-table').show();
 
   var version = 1, page = 1, count = 10, searchKeyword = $(".ridi-search-field").val();
+
+  if(searchKeyword == ""){
+    $('.ridi-songs-table').hide();    
+  }
 
   $.ajax({
     url: "http://apis.skplanetx.com/melon/songs?version=" + version + "&page=" + page + "&count=" + count + "&searchKeyword=" + searchKeyword,
@@ -67,4 +89,5 @@ $(function () {
   });
   
   $(".ridi-search-button").on("click", search);
+  getList();
 });

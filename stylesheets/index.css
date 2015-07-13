@@ -5,6 +5,7 @@
 }
 
 .ridi-songs-table {
+  display: none;
   margin-left: auto;
   margin-right: auto;
 }
@@ -26,4 +27,8 @@
 .ridi-spinner {
   top: 50%;
   margin-top: -14px;
+}
+
+.structure_row{
+  display: none;
 }
