@@ -9,72 +9,14 @@
     <link rel="stylesheet" href="./stylesheets/index.css">
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-    <script>
-      function zeroPad(nr,base){
-        var len = (String(base).length - String(nr).length)+1;
-        return len > 0? new Array(len).join('0')+nr : nr;
-      }
-      $(function(){
-        $('.ridi-search-button').on('click', function(){
-          $(".ridi-songs-result").remove();
-          
-          var version = 1;
-          var page = 1;
-          var count = 10;
-          var searchKeyword = $(".ridi-search-field").val();
-          
-          $.ajax({
-            url: "http://apis.skplanetx.com/melon/songs?version=" + version + "&page=" + page + "&count=" + count + "&searchKeyword=" + searchKeyword,
-            dataType: "json",
-            headers: {
-              "appKey": "9aefbb17-3d67-3069-a732-e03e4bb3b40c",
-              "Accept-Language": "ko",
-              "Accept": "application/json",
-              "Content-Type": "application/xml; charset=utf-8"
-            }
-          }).done(function(data){
-            var songs = data.melon.songs.song
-            for (var i = 0; i < songs.length ; i++) {
-              var songName = songs[i].songName;
-              var artistName = songs[i].artists.artist[0].artistName;
-              var albumName = songs[i].albumName;
-              var playTime = songs[i].playTime;
-              $(".ridi-songs-tbody").append(
-                "<tr class='ridi-songs-result'>" +
-                "<td class='mdl-data-table__cell--non-numeric' id='song-" + i + "'>" + songName +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric' id='artist-" + i + "'>" + artistName +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric' id='album-" + i + "'>" + albumName +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric' id='play-time-" + i + "'>" + playTime +"</td>" +
-                "<td class='mdl-data-table__cell--non-numeric'><button class='ridi-add-button mdl-button mdl-js-button mdl-button--icon mdl-button--accent' id='button-" + i + "'><i class='material-icons'>add</i></button></td>" +
-                "</tr>"
-              );
-              $("#button-" + i).on('click', function(){
-                var index = this.id.replace('button-', '');
-                songName = $("#song-" + index).text();
-                artistName = $("#artist-" + index).text();
-                albumName = $("#album-" + index).text();
-                playTime = $("#play-time-" + index).text();
-
-                var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
-
-                $.ajax({
-                  url: "http://ridj.herokuapp.com/api/orders/new",
-                  dataType: "json",
-                  method: "POST",
-                  data: requestData,
-                }).done(function(data){
-                  alert("곡이 신청되었습니다.");
-                });
-              });
-            }
-          });
-        });
-      });
-    </script>
+    <script src="scripts/ridj.js"></script>
     <title>RIDI-J</title>
   </head>
   <body>
-    <form class="ridi-search-form" action="#">
+    <div class="modal-spinner">
+      <div class="ridi-spinner mdl-spinner mdl-js-spinner is-active"></div>
+    </div>
+    <div class="ridi-search-form">
       <div class="mdl-textfield mdl-js-textfield">
         <input class="ridi-search-field mdl-textfield__input" type="text" id="song" />
         <label class="mdl-textfield__label" for="song">아티스트 혹은 곡 이름으로 검색..</label>
@@ -82,7 +24,7 @@
       <button class="ridi-search-button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
         <i class="material-icons">search</i>
       </button>
-    </form>
+    </div>
     <table class="ridi-songs-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
       <thead>
         <tr>
