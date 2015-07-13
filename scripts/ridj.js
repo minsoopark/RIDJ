@@ -13,8 +13,8 @@ function getList(){
       for(var i=0; i<data.orders.length; i++){
         var playTime = calculateTime(data.orders[i].play_time);
         var tmpRow = structureRow.clone();
-        tmpRow.find('.album_title').html(data.orders[i].album);
         tmpRow.find('.song_title').html(data.orders[i].song);
+        tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
         tmpRow.find('.artist').html(data.orders[i].artist);
         tmpRow.find('.play_time').html(playTime);
         $('.added_list_body').append(tmpRow);
@@ -25,7 +25,7 @@ function getList(){
 
 function calculateTime(time){
   var playTime = Number(time);
-  return parseInt(playTime/60) + "분 " + (playTime%60) + "초";
+  return parseInt(playTime/60) + " : " + (playTime%60);
 }
 
 function search() {
@@ -54,8 +54,8 @@ function search() {
       var albumName = songs[i].albumName;
       var playTime = calculateTime(songs[i].playTime);
       tmpRow.find('.song_name').html(songName).attr('id', 'song-' + i);
+      tmpRow.find('.album_name').html("[" + albumName + " ]").attr('id', 'album-' + i);
       tmpRow.find('.artist_name').html(artistName).attr('id', 'artist-' + i);
-      tmpRow.find('.album_name').html(albumName).attr('id', 'album-' + i);
       tmpRow.find('.play_time').html(playTime).attr('id', 'play-time-' + i).val(songs[i].playTime);
       tmpRow.find('.ridi-add-button').attr('id', 'button-' + i);
       $(".ridi-songs-tbody").append(tmpRow);
@@ -80,6 +80,8 @@ function search() {
         }).done(function (data) {
           $(".modal-spinner").css("display", "none");
           alert("곡이 신청되었습니다.");
+          $(".ridi-search-field").val("");
+          $(".searching_area").removeClass("on");
           getList();
         });
       });
@@ -88,6 +90,16 @@ function search() {
 }
 
 $(function () {
+  $(".ridi-search-field").focus(function() {
+    $('.searching_area').addClass("on");
+  });
+  $(".searching_area").click(function() {
+    if($(event.target).is(".searching_area.on")) {
+      $(".ridi-search-field").val("");
+      $(".searching_area").removeClass("on");
+    }
+  })
+
   $(".ridi-search-field").on("keypress", function (e) {
     if (e.which == 13) {
       search();

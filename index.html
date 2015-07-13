@@ -30,19 +30,19 @@
       </div>
       <table class="ridi-songs-table">
         <thead>
-          <tr>
-            <th>곡</th>
-            <th>아티스트</th>
-            <th>앨범</th>
-            <th>재생시간</th>
-            <th>신청</th>
-          </tr>
+          <colgroup>
+            <col width="auto">
+            <col width="20%">
+            <col width="10%">
+            <col width="5%">
+          </colgroup>
         </thead>
         <tbody class="ridi-songs-tbody">
           <tr class='ridi-songs-result structure_row'>
-            <td class='song_name'></td>
+            <td>
+              <p class="song_name"></p>
+              <p class='album_name'></p>
             <td class='artist_name'></td>
-            <td class='album_name'></td>
             <td class='play_time'></td>
             <td>
               <button class='ridi-add-button'><i class='material-icons'>add</i></button>
@@ -56,21 +56,16 @@
         <thead>
           <colgroup>
             <col width="auto">
-            <col width="auto">
             <col width="20%">
             <col width="10%">
           </colgroup>
-          <tr>
-            <th>곡명</th>
-            <th>곡앨범</th>
-            <th>아티스트</th>
-            <th>재생시간</th>
-          </tr>
         </thead>
         <tbody class="added_list_body">
           <tr class="structure_row">
-            <td class="song_title"></td>
-            <td class="album_title"></td>
+            <td>
+              <p class="song_title"></p>
+              <p class="album_title"></p>
+            </td>
             <td class="artist"></td>
             <td class="play_time"></td>
           </tr>
