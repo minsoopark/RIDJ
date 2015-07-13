@@ -7,6 +7,7 @@ function getList(){
   $.ajax({
     url: "http://ridj.herokuapp.com/orders",
     success: function(data, structureRow) {
+      $('.added_list_body').find('tr:not(.structure_row)').remove();
       for(var i=0; i<data.orders.length; i++){
         var playTime = Number(data.orders[i].play_time);
         var tmpRow = $('.structure_row').clone().removeClass('structure_row');
@@ -75,6 +76,8 @@ function search() {
         }).done(function (data) {
           $(".modal-spinner").css("display", "none");
           alert("곡이 신청되었습니다.");
+          $('.ridi-songs-table').hide();
+          getList();
         });
       });
     }
@@ -89,5 +92,6 @@ $(function () {
   });
   
   $(".ridi-search-button").on("click", search);
+
   getList();
 });

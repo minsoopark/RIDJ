@@ -1,13 +1,11 @@
 .ridi-search-form {
   width: 344px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20px;
 }
 
 .ridi-songs-table {
-  display: none;
-  margin-left: auto;
-  margin-right: auto;
+  display: none; position: absolute; left: 10px; top: 70px;
+  margin-left: auto; margin-right: auto;
 }
 
 .ridi-add-button {
