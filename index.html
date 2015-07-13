@@ -9,26 +9,27 @@
     <link rel="stylesheet" href="./stylesheets/index.css">
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script src="scripts/less.min.js"></script>
     <script src="scripts/ridj.js"></script>
     <title>RIDI-J</title>
   </head>
   <body>
     <!-- spinner -->
     <div class="modal-spinner">
-      <div class="ridi-spinner mdl-spinner mdl-js-spinner is-active"></div>
+      <div class="ridi_spinner mdl-spinner mdl-js-spinner is-active"></div>
     </div>
 
     <!-- searching_area -->
     <div class="searching_area">
-      <div class="ridi-search-form">
+      <div class="ridi_search_form">
         <div class="search_input_wrap">
-          <input class="ridi-search-field" type="text" id="song" placeholder="아티스트 혹은 곡 이름으로 검색" />
+          <input class="ridi_search_field" type="text" id="song" placeholder="아티스트 혹은 곡 이름으로 검색" />
         </div>
         <div class="search_button_wrap">
-          <button class="ridi-search-button">검색</button>
+          <button class="ridi_search_button">검색</button>
         </div>
       </div>
-      <table class="ridi-songs-table">
+      <table class="ridi_songs_table">
         <thead>
           <colgroup>
             <col width="auto">
@@ -37,15 +38,15 @@
             <col width="5%">
           </colgroup>
         </thead>
-        <tbody class="ridi-songs-tbody">
-          <tr class='ridi-songs-result structure_row'>
+        <tbody class="ridi_songs_tbody">
+          <tr class='ridi_songs_result structure_row'>
             <td>
               <p class="song_name"></p>
               <p class='album_name'></p>
             <td class='artist_name'></td>
             <td class='play_time'></td>
             <td>
-              <button class='ridi-add-button'><i class='material-icons'>add</i></button>
+              <button class='ridi_add_button'><i class='material-icons'>add</i></button>
             </td>
           </tr>
         </tbody>

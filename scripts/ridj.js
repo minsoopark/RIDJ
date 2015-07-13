@@ -29,9 +29,9 @@ function calculateTime(time){
 }
 
 function search() {
-  $(".ridi-songs-tbody").find('tr:not(.structure_row)').remove();
+  $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
 
-  var version = 1, page = 1, count = 10, searchKeyword = $(".ridi-search-field").val();
+  var version = 1, page = 1, count = 10, searchKeyword = $(".ridi_search_field").val();
 
   $.ajax({
     url: "http://apis.skplanetx.com/melon/songs?version=" + version + "&page=" + page + "&count=" + count + "&searchKeyword=" + searchKeyword,
@@ -44,7 +44,7 @@ function search() {
     }
   }).done(function (data) {
     var songs = data.melon.songs.song;
-    var structureRow = $('.ridi-songs-tbody').find('.structure_row').clone().removeClass('structure_row');
+    var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
     for (var i = 0; i < songs.length ; i++) {
       var tmpRow = structureRow.clone();
       
@@ -57,8 +57,8 @@ function search() {
       tmpRow.find('.album_name').html("[" + albumName + " ]").attr('id', 'album-' + i);
       tmpRow.find('.artist_name').html(artistName).attr('id', 'artist-' + i);
       tmpRow.find('.play_time').html(playTime).attr('id', 'play-time-' + i).val(songs[i].playTime);
-      tmpRow.find('.ridi-add-button').attr('id', 'button-' + i);
-      $(".ridi-songs-tbody").append(tmpRow);
+      tmpRow.find('.ridi_add_button').attr('id', 'button-' + i);
+      $(".ridi_songs_tbody").append(tmpRow);
 
       // 추가 버튼 액션
       $("#button-" + i).on("click", function () {
@@ -80,7 +80,7 @@ function search() {
         }).done(function (data) {
           $(".modal-spinner").css("display", "none");
           alert("곡이 신청되었습니다.");
-          $(".ridi-search-field").val("");
+          $(".ridi_search_field").val("");
           $(".searching_area").removeClass("on");
           getList();
         });
@@ -90,23 +90,27 @@ function search() {
 }
 
 $(function () {
-  $(".ridi-search-field").focus(function() {
+  // # less file compile automatically whenever page refreshed
+  localStorage.clear();
+  less.refresh();
+
+  $(".ridi_search_field").focus(function() {
     $('.searching_area').addClass("on");
   });
   $(".searching_area").click(function() {
     if($(event.target).is(".searching_area.on")) {
-      $(".ridi-search-field").val("");
+      $(".ridi_search_field").val("");
       $(".searching_area").removeClass("on");
     }
   })
 
-  $(".ridi-search-field").on("keypress", function (e) {
+  $(".ridi_search_field").on("keypress", function (e) {
     if (e.which == 13) {
       search();
     }
   });
   
-  $(".ridi-search-button").on("click", search);
+  $(".ridi_search_button").on("click", search);
 
   getList();
 });
