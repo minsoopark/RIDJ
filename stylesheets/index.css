@@ -40,18 +40,11 @@ td p { margin: 0; padding: 0; }
 .searching_area .ridi_search_form .search_input_wrap .ridi_search_field:focus{
   border: none; box-shadow: none; outline: none;
 }
-.searching_area .ridi_search_form .search_button_wrap{
-  width: 50px; padding: 10px 0;
-  vertical-align: top;
-}
-.searching_area .ridi_search_form .search_button_wrap .ridi_search_button{
-  display: none; height: 35px; width: 50px; border-radius: 5px; cursor: pointer;
-  background: none; border: 1px solid #e9e9e9;
-}
 
 .searching_area .ridi_songs_table {
   display: none; height: 100%; width: 50%;
   margin: 0 auto; overflow-y: scroll;
+  border-collapse: collapse;
 }
 .searching_area .ridi_songs_table .ridi_song_tbody{
   width: 100%;

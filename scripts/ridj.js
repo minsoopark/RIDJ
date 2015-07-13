@@ -91,8 +91,8 @@ function search() {
 
 $(function () {
   // # less file compile automatically whenever page refreshed
-  localStorage.clear();
-  less.refresh();
+  // localStorage.clear();
+  // less.refresh();
 
   $(".ridi_search_field").focus(function() {
     $('.searching_area').addClass("on");
@@ -110,7 +110,5 @@ $(function () {
     }
   });
   
-  $(".ridi_search_button").on("click", search);
-
   getList();
 });
