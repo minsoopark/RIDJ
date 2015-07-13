@@ -6,24 +6,31 @@ function zeroPad(nr, base) {
 function getList(){
   $.ajax({
     url: "http://ridj.herokuapp.com/orders",
-    success: function(data, structureRow) {
+    success: function(data) {
+      // 리스트 바인딩
       $('.added_list_body').find('tr:not(.structure_row)').remove();
+      var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
       for(var i=0; i<data.orders.length; i++){
-        var playTime = Number(data.orders[i].play_time);
-        var tmpRow = $('.structure_row').clone().removeClass('structure_row');
+        var playTime = calculateTime(data.orders[i].play_time);
+        var tmpRow = structureRow.clone();
         tmpRow.find('.album_title').html(data.orders[i].album);
         tmpRow.find('.song_title').html(data.orders[i].song);
         tmpRow.find('.artist').html(data.orders[i].artist);
-        tmpRow.find('.play_time').html(parseInt(playTime/60) + "분 " + (playTime%60) + "초");
+        tmpRow.find('.play_time').html();
         $('.added_list_body').append(tmpRow);
       };
     }
   });
 }
 
+function calculateTime(time){
+  var playTime = Number(time);
+  return parseInt(playTime/60) + "분 " + (playTime%60) + "초";
+}
+
 function search() {
-  $(".ridi-songs-result").remove();
-  $('.ridi-songs-table').show();
+  $(".ridi-songs-tbody").find('tr:not(.structure_row)').remove();
+  $(".ridi-songs-table").show();
 
   var version = 1, page = 1, count = 10, searchKeyword = $(".ridi-search-field").val();
 
@@ -42,29 +49,31 @@ function search() {
     }
   }).done(function (data) {
     var songs = data.melon.songs.song;
+    var structureRow = $('.ridi-songs-tbody').find('.structure_row').clone().removeClass('structure_row');
     for (var i = 0; i < songs.length ; i++) {
+      var tmpRow = structureRow.clone();
+      
+      // 데이터 바인딩
       var songName = songs[i].songName;
       var artistName = songs[i].artists.artist[0].artistName;
       var albumName = songs[i].albumName;
-      var playTime = songs[i].playTime;
-      $(".ridi-songs-tbody").append(
-        "<tr class='ridi-songs-result'>" +
-        "<td class='mdl-data-table__cell--non-numeric' id='song-" + i + "'>" + songName +"</td>" +
-        "<td class='mdl-data-table__cell--non-numeric' id='artist-" + i + "'>" + artistName +"</td>" +
-        "<td class='mdl-data-table__cell--non-numeric' id='album-" + i + "'>" + albumName +"</td>" +
-        "<td class='mdl-data-table__cell--non-numeric' id='play-time-" + i + "'>" + playTime +"</td>" +
-        "<td class='mdl-data-table__cell--non-numeric'><button class='ridi-add-button mdl-button mdl-js-button mdl-button--icon mdl-button--accent' id='button-" + i + "'><i class='material-icons'>add</i></button></td>" +
-        "</tr>"
-      );
+      var playTime = calculateTime(songs[i].playTime);
+      tmpRow.find('.song_name').html(songName).attr('id', 'song-' + i);
+      tmpRow.find('.artist_name').html(artistName).attr('id', 'artist-' + i);
+      tmpRow.find('.album_name').html(albumName).attr('id', 'album-' + i);
+      tmpRow.find('.play_time').html(playTime).attr('id', 'play-time-' + i).val(songs[i].playTime);
+      tmpRow.find('.ridi-add-button').attr('id', 'button-' + i);
+      $(".ridi-songs-tbody").append(tmpRow);
+
+      // 추가 버튼 액션
       $("#button-" + i).on("click", function () {
         var index = this.id.replace("button-", "");
         songName = $("#song-" + index).text();
         artistName = $("#artist-" + index).text();
         albumName = $("#album-" + index).text();
-        playTime = $("#play-time-" + index).text();
+        playTime = $("#play-time-" + index).val();
 
         var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
-
         $.ajax({
           url: "http://ridj.herokuapp.com/api/orders/new",
           dataType: "json",
