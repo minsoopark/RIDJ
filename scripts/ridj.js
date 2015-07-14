@@ -36,7 +36,13 @@ function getList(){
       for(var i=0; i<data.orders.length; i++){
         var playTime = calculateTime(data.orders[i].play_time);
         var tmpRow = structureRow.clone();
-        tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
+        if(data.orders[i].cover_src == "" || data.orders[i].cover_src == undefined || data.orders[i].cover_src == null) {
+          tmpRow.find('.cover_column').addClass("image_null");
+          tmpRow.find('.cover_column').html('No Image')
+        }
+        else {
+          tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
+        }
         tmpRow.find('.song_title').html(data.orders[i].song);
         tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
         tmpRow.find('.artist').html(data.orders[i].artist);
