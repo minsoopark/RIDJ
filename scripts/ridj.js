@@ -25,7 +25,7 @@ function getList(){
 
 function calculateTime(time){
   var playTime = Number(time);
-  return zeroPad(parseInt(playTime/60), 10) + " : " + zeroPad(playTime%60, 10);
+  return zeroPad(parseInt(playTime/60), 10) + ":" + zeroPad(playTime%60, 10);
 }
 
 function search() {
