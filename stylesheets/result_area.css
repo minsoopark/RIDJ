@@ -1,0 +1,27 @@
+.result_area {
+  width: 50%; margin: 73px auto 0;
+}
+.result_area .added_list{
+  width: 100%; border-collapse: collapse;
+}
+.result_area .added_list th{
+  height: 50px; border-bottom: 2px solid #e9e9e9;
+}
+.result_area .added_list td{
+  text-align: center; padding: 10px 5px;
+  border-bottom: 1px solid #e9e9e9;
+
+}
+.album_title, .album_name,
+.song_title, .song_name{
+  text-align: left;
+}
+.result_area .added_list td .song_title{
+  font-size: 16px; font-weight: bold;
+}
+.result_area .added_list td .album_title{
+  font-size: 13px; font-weight: lighter;
+}
+.result_area  .added_list td .artist{
+  font-size: 14px;
+}
