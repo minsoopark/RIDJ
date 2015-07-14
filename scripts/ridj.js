@@ -1,28 +1,7 @@
+// 값 관련 함수들
 function zeroPad(nr, base) {
   var len = (String(base).length - String(nr).length) + 1;
   return len > 0 ? (new Array(len).join('0') + nr) : nr;
-}
-
-function getList(){
-  $.ajax({
-    url: "http://ridj.herokuapp.com/orders",
-    success: function(data) {
-      // 리스트 바인딩
-      $('.added_list_body').find('tr:not(.structure_row)').remove();
-      var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
-      for(var i=0; i<data.orders.length; i++){
-        var playTime = calculateTime(data.orders[i].play_time);
-        var tmpRow = structureRow.clone();
-        console.log(data.orders[i]);
-        tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
-        tmpRow.find('.song_title').html(data.orders[i].song);
-        tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
-        tmpRow.find('.artist').html(data.orders[i].artist);
-        tmpRow.find('.play_time').html(playTime);
-        $('.added_list_body').append(tmpRow);
-      }
-    }
-  });
 }
 
 function calculateTime(time){
@@ -39,6 +18,36 @@ function makeCoverSrc(idValue){
   return "http://image.melon.co.kr/cm/album/images/" + firstQuery + "/" + secondQuery + "/" + thirdQuery + "/" + idValue + ".jpg";
 }
 
+// 검색창 초기화 함수
+function clearSearch() {
+  $(".ridi_search_field").val("");
+  $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
+  $(".searching_area").removeClass("on");
+}
+
+// 리스트 가져오는 함수
+function getList(){
+  $.ajax({
+    url: "http://ridj.herokuapp.com/orders",
+    success: function(data) {
+      // 리스트 바인딩
+      $('.added_list_body').find('tr:not(.structure_row)').remove();
+      var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
+      for(var i=0; i<data.orders.length; i++){
+        var playTime = calculateTime(data.orders[i].play_time);
+        var tmpRow = structureRow.clone();
+        tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
+        tmpRow.find('.song_title').html(data.orders[i].song);
+        tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
+        tmpRow.find('.artist').html(data.orders[i].artist);
+        tmpRow.find('.play_time').html(playTime);
+        $('.added_list_body').append(tmpRow);
+      }
+    }
+  });
+}
+
+// 검색 함수
 function search() {
   $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
 
@@ -109,12 +118,6 @@ function search() {
       });
     }
   });
-}
-
-function clearSearch() {
-  $(".ridi_search_field").val("");
-  $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
-  $(".searching_area").removeClass("on");
 }
 
 $(function () {
