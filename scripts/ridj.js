@@ -80,13 +80,18 @@ function search() {
         }).done(function (data) {
           $(".modal-spinner").css("display", "none");
           alert("곡이 신청되었습니다.");
-          $(".ridi_search_field").val("");
-          $(".searching_area").removeClass("on");
+          clearSearch();
           getList();
         });
       });
     }
   });
+}
+
+function clearSearch() {
+  $(".ridi_search_field").val("");
+  $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
+  $(".searching_area").removeClass("on");
 }
 
 $(function () {
@@ -95,10 +100,10 @@ $(function () {
   });
   $(".searching_area").click(function() {
     if($(event.target).is(".searching_area.on")) {
-      $(".ridi_search_field").val("");
-      $(".searching_area").removeClass("on");
+      clearSearch();
     }
-  })
+  });
+  $(".search_input_wrap .clear_button").click(clearSearch);
 
   $(".ridi_search_field").on("keypress", function (e) {
     if (e.which == 13) {

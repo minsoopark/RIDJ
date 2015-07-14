@@ -1,27 +1,36 @@
 /* 검색 영역 */
 .searching_area {
-  position: fixed; top: 0; left: 0;
+  position: fixed; width: 100%; top: 0; left: 0;
   transition: background .2s;
 }
 .searching_area .ridi_search_form {
-  display: table; table-layout: fixed; text-align: center;
   width: 100%; margin: 0 auto; box-sizing: border-box;
-  background: rgba(255, 255, 255, .9);
-}
-.searching_area .ridi_search_form .search_input_wrap,
-.searching_area .ridi_search_form .search_button_wrap{
-  display: table-cell; 
+  text-align: center;  background: rgba(255, 255, 255, .9);
+  transition: border .2s;
 }
 .searching_area .ridi_search_form .search_input_wrap{
-  width: auto; padding: 10px 10px 10px 0;
+  position: relative; width: 50%; margin: 0 auto; padding: 10px 10px 10px 0;
+}
+.searching_area .ridi_search_form .search_input_wrap .icon-openq{
+  position: absolute; left: -20px;
+  font-size: 20px; color: black;
+  transition: color .2s;
 }
 .searching_area .ridi_search_form .search_input_wrap .ridi_search_field{
-  width: 50%; padding: 10px; box-sizing: border-box;
+  width: 100%; padding: 10px; box-sizing: border-box;
   border: none; font-size: 30px; color: #333; 
   background: none; font-weight: lighter;
 }
 .searching_area .ridi_search_form .search_input_wrap .ridi_search_field:focus{
   border: none; box-shadow: none; outline: none;
+}
+.searching_area .ridi_search_form .search_input_wrap .clear_button{
+  position: absolute; top: 0; right: 0; cursor: pointer;
+  -webkit-appearance: none; border: none; background: transparent;
+  display: none;
+}
+.searching_area .ridi_search_form .search_input_wrap .clear_button .close_icon{
+  color: white; line-height: 70px; font-size: 30px;
 }
 
 /* 검색결과 창 */
@@ -37,7 +46,7 @@
   transition: background .2s;
 }
 .searching_area .ridi_songs_table tr:hover{
-  background: rgba(0,0,0,.2);
+  background: rgba(255,255,255,.2);
 }
 .searching_area .ridi_songs_table th,
 .searching_area .ridi_songs_table td{
@@ -50,21 +59,37 @@
 .searching_area .ridi_songs_table td .song_name{
   text-align: left;
 }
-.searching_area .ridi_songs_table
 .searching_area .ridi_songs_table .ridi_add_button {
-  margin-top: -6px; cursor: pointer;
+  width: 30px; height: 30px; margin-top: -6px; transition: background .2s;
+  border-radius: 15px; cursor: pointer; border: 2px solid #fff;
+  -webkit-appearance: none; background: transparent;
 }
+.searching_area .ridi_songs_table .ridi_add_button .icon-plus_1{
+  font-size: 20px; color: white; transition: color .2s;
+}
+.searching_area .ridi_songs_table .ridi_add_button:hover{
+  background: white; 
+}
+.searching_area .ridi_songs_table .ridi_add_button:hover .icon-plus_1{
+  color: black;
+}
+
 
 /* 검색결과 창 활성화 상태 */
 .searching_area.on{
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,.9);
+  height: 100%; background: rgba(0,0,0,.9);
 }
 .searching_area.on .ridi_search_form {
-  background: transparent;
+  background: transparent; border-bottom: 1px solid rgba(255,255,255,.5);
+}
+.searching_area.on .ridi_search_form .search_input_wrap .icon-openq{
+  color: white;
 }
 .searching_area.on .ridi_search_form .search_input_wrap .ridi_search_field{
   color: white;
+}
+.searching_area.on .ridi_search_form .search_input_wrap .clear_button{
+  display: block;
 }
 .searching_area.on .ridi_songs_table{
   display: block;
