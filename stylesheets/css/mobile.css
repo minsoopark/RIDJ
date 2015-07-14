@@ -1,0 +1,63 @@
+@media (max-width: 900px) {
+  .top_navigation {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: right;
+    background-color: #1F8EE6;
+    z-index: 999;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  .top_navigation .searching_trigger {
+    position: static;
+    width: 50px;
+    height: 100%;
+    cursor: pointer;
+    box-shadow: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0;
+  }
+  .top_navigation .searching_trigger .icon-search,
+  .top_navigation .searching_trigger .icon-close_3 {
+    font-size: 20px;
+    color: white;
+  }
+  .top_navigation .searching_trigger .icon-close_3 {
+    display: none;
+  }
+  .top_navigation .searching_trigger.on .icon-search {
+    display: none;
+  }
+  .top_navigation .searching_trigger.on .icon-close_3 {
+    display: block;
+  }
+  .top_navigation .searching_trigger:focus,
+  .top_navigation .searching_trigger:active {
+    border: none;
+    outline: none;
+  }
+  .searching_area {
+    padding-top: 50px;
+  }
+  .searching_area .ridi_search_form .search_input_wrap .ridi_search_field {
+    font-size: 20px;
+  }
+  .searching_area .ridi_songs_table {
+    padding: 0;
+  }
+  .result_area {
+    padding-top: 55px;
+    padding-left: 10px;
+  }
+  .result_area .added_list td.cover_column {
+    padding: 5px 0;
+    border-bottom: 0;
+    box-sizing: border-box;
+  }
+  .result_area .added_list td.cover_column.image_null {
+    background: none;
+  }
+}
