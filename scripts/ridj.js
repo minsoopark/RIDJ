@@ -13,7 +13,8 @@ function getList(){
       for(var i=0; i<data.orders.length; i++){
         var playTime = calculateTime(data.orders[i].play_time);
         var tmpRow = structureRow.clone();
-        tmpRow.find('.album_cover').html('')
+        console.log(data.orders[i]);
+        tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
         tmpRow.find('.song_title').html(data.orders[i].song);
         tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
         tmpRow.find('.artist').html(data.orders[i].artist);
@@ -90,7 +91,7 @@ function search() {
         coverSrc = addedTarget.find('.album_cover').attr('src');
 
         var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
-        requestData += "&song_id=" + songId + "&album_id" + albumId + "&artist_id" + artistId + "&cover_src" + coverSrc;
+        requestData += "&song_id=" + songId + "&album_id=" + albumId + "&artist_id=" + artistId + "&cover_src=" + coverSrc;
         $.ajax({
           url: "http://ridj.herokuapp.com/api/orders/new",
           dataType: "json",
