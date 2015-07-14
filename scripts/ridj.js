@@ -13,12 +13,13 @@ function getList(){
       for(var i=0; i<data.orders.length; i++){
         var playTime = calculateTime(data.orders[i].play_time);
         var tmpRow = structureRow.clone();
+        tmpRow.find('.album_cover').html('')
         tmpRow.find('.song_title').html(data.orders[i].song);
         tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
         tmpRow.find('.artist').html(data.orders[i].artist);
         tmpRow.find('.play_time').html(playTime);
         $('.added_list_body').append(tmpRow);
-      };
+      }
     }
   });
 }
@@ -26,6 +27,14 @@ function getList(){
 function calculateTime(time){
   var playTime = Number(time);
   return zeroPad(parseInt(playTime/60), 10) + ":" + zeroPad(playTime%60, 10);
+}
+
+function makeCoverSrc(idValue){
+  var idLength = ("" + idValue).length;
+  var firstQuery = parseInt(idValue/Math.pow(10, idLength-2));
+  var secondQuery = parseInt((idValue%Math.pow(10, idLength-2)) / Math.pow(10, idLength-4));
+  var thirdQuery = idValue%Math.pow(10, idLength-4);
+  return "http://image.melon.co.kr/cm/album/images/0" + firstQuery + "/" + secondQuery + "/" + thirdQuery + "/" + idValue + ".jpg";
 }
 
 function search() {
@@ -47,17 +56,19 @@ function search() {
     var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
     for (var i = 0; i < songs.length ; i++) {
       var tmpRow = structureRow.clone();
-      
       // 데이터 바인딩
       var songName = songs[i].songName;
       var artistName = songs[i].artists.artist[0].artistName;
       var albumName = songs[i].albumName;
       var playTime = calculateTime(songs[i].playTime);
+      var imgSrc = makeCoverSrc(songs[i].albumId);
+      tmpRow.find('.album_cover').attr('src', imgSrc);
       tmpRow.find('.song_name').html(songName).attr('id', 'song-' + i);
-      tmpRow.find('.album_name').html("[" + albumName + " ]").attr('id', 'album-' + i);
+      tmpRow.find('.album_name').html(albumName).attr('id', 'album-' + i);
       tmpRow.find('.artist_name').html(artistName).attr('id', 'artist-' + i);
       tmpRow.find('.play_time').html(playTime).attr('id', 'play-time-' + i).val(songs[i].playTime);
       tmpRow.find('.ridi_add_button').attr('id', 'button-' + i);
+
       $(".ridi_songs_tbody").append(tmpRow);
 
       // 추가 버튼 액션
