@@ -33,19 +33,30 @@
     }//.ridi_search_form
     .ridi_songs_table{
       padding: 0;
+      tr{
+        td{
+          padding: 10px; font-size: 12px;
+        }
+      }
     }//.ridi_songs_table
   }//.searching_area
   .result_area{
     padding-top: 55px; padding-left: 10px;
     .added_list{
       td{
+        font-size: 12px;
         &.cover_column{
           padding: 5px 0; border-bottom: 0; box-sizing: border-box;
           &.image_null{
             background: none;
           }
-        }
-      }
-    }
-  }
+        }//.cover_column
+        &.title_column{
+          .song_title{ font-size: 14px; }
+          .album_title{ font-size: 12px; }
+        }//.title_column
+        .artist{ font-size: 12px; }
+      }//td
+    }//.added_list
+  }//.result_area
 }

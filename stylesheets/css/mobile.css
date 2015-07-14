@@ -48,9 +48,16 @@
   .searching_area .ridi_songs_table {
     padding: 0;
   }
+  .searching_area .ridi_songs_table tr td {
+    padding: 10px;
+    font-size: 12px;
+  }
   .result_area {
     padding-top: 55px;
     padding-left: 10px;
+  }
+  .result_area .added_list td {
+    font-size: 12px;
   }
   .result_area .added_list td.cover_column {
     padding: 5px 0;
@@ -59,5 +66,14 @@
   }
   .result_area .added_list td.cover_column.image_null {
     background: none;
+  }
+  .result_area .added_list td.title_column .song_title {
+    font-size: 14px;
+  }
+  .result_area .added_list td.title_column .album_title {
+    font-size: 12px;
+  }
+  .result_area .added_list td .artist {
+    font-size: 12px;
   }
 }
