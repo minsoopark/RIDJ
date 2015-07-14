@@ -63,24 +63,34 @@ function search() {
       var albumName = songs[i].albumName;
       var playTime = calculateTime(songs[i].playTime);
       var imgSrc = makeCoverSrc(songs[i].albumId);
+      var songId = songs[i].songId;
+      var albumId = songs[i].albumId;
+      var artistId = songs[i].artistId;
       tmpRow.find('.album_cover').attr('src', imgSrc);
-      tmpRow.find('.song_name').html(songName).attr('id', 'song-' + i);
-      tmpRow.find('.album_name').html(albumName).attr('id', 'album-' + i);
-      tmpRow.find('.artist_name').html(artistName).attr('id', 'artist-' + i);
-      tmpRow.find('.play_time').html(playTime).attr('id', 'play-time-' + i).val(songs[i].playTime);
+      tmpRow.find('.song_name').html(songName);
+      tmpRow.find('.album_name').html(albumName);
+      tmpRow.find('.artist_name').html(artistName);
+      tmpRow.find('.play_time').html(playTime).val(songs[i].playTime);
       tmpRow.find('.ridi_add_button').attr('id', 'button-' + i);
+      tmpRow.attr('id', 'list-' + i).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
 
       $(".ridi_songs_tbody").append(tmpRow);
 
       // 추가 버튼 액션
       $("#button-" + i).on("click", function () {
         var index = this.id.replace("button-", "");
-        songName = $("#song-" + index).text();
-        artistName = $("#artist-" + index).text();
-        albumName = $("#album-" + index).text();
-        playTime = $("#play-time-" + index).val();
+        var addedTarget = $('#list-' + index);
+        songName = addedTarget.find('.song_name').text();
+        artistName = addedTarget.find('.artist_name').text();
+        albumName = addedTarget.find('.album_name').text();
+        playTime = addedTarget.find('.play_time').val();
+        songId = addedTarget.attr('song_id');
+        albumId = addedTarget.attr('album_id');
+        artistId = addedTarget.attr('artist_id');
+        coverSrc = addedTarget.find('.album_cover').attr('src');
 
         var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
+        requestData += "&song_id=" + songId + "&album_id" + albumId + "&artist_id" + artistId + "&cover_src" + coverSrc;
         $.ajax({
           url: "http://ridj.herokuapp.com/api/orders/new",
           dataType: "json",
