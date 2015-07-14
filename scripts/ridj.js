@@ -25,7 +25,7 @@ function getList(){
 
 function calculateTime(time){
   var playTime = Number(time);
-  return parseInt(playTime/60) + " : " + (playTime%60);
+  return zeroPad(parseInt(playTime/60), 10) + " : " + zeroPad(playTime%60, 10);
 }
 
 function search() {
@@ -90,10 +90,6 @@ function search() {
 }
 
 $(function () {
-  // # less file compile automatically whenever page refreshed
-  // localStorage.clear();
-  // less.refresh();
-
   $(".ridi_search_field").focus(function() {
     $('.searching_area').addClass("on");
   });

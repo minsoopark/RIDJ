@@ -21,8 +21,8 @@ td p { margin: 0; padding: 0; }
   transition: background .2s;
 }
 .searching_area .ridi_search_form {
-  display: table; table-layout: fixed;
-  width: 50%; margin: 0 auto; box-sizing: border-box;
+  display: table; table-layout: fixed; text-align: center;
+  width: 100%; margin: 0 auto; box-sizing: border-box;
   background: rgba(255, 255, 255, .9);
 }
 .searching_area .ridi_search_form .search_input_wrap,
@@ -33,7 +33,7 @@ td p { margin: 0; padding: 0; }
   width: auto; padding: 10px 10px 10px 0;
 }
 .searching_area .ridi_search_form .search_input_wrap .ridi_search_field{
-  width: 100%; padding: 10px; box-sizing: border-box;
+  width: 50%; padding: 10px; box-sizing: border-box;
   border: none; font-size: 30px; color: #333; 
   background: none; font-weight: lighter;
 }
