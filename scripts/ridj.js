@@ -30,11 +30,12 @@ function calculateTime(time){
 }
 
 function makeCoverSrc(idValue){
-  var idLength = ("" + idValue).length;
-  var firstQuery = parseInt(idValue/Math.pow(10, idLength-2));
-  var secondQuery = parseInt((idValue%Math.pow(10, idLength-2)) / Math.pow(10, idLength-4));
-  var thirdQuery = idValue%Math.pow(10, idLength-4);
-  return "http://image.melon.co.kr/cm/album/images/0" + firstQuery + "/" + secondQuery + "/" + thirdQuery + "/" + idValue + ".jpg";
+  var idString = ("" + idValue);
+  var idLength = idString.length;
+  var firstQuery = zeroPad(idString.substring(0, idLength - 5), 100);
+  var secondQuery = idString.substring(idLength - 5, idLength - 3);
+  var thirdQuery = idString.substring(idLength - 3, idLength);
+  return "http://image.melon.co.kr/cm/album/images/" + firstQuery + "/" + secondQuery + "/" + thirdQuery + "/" + idValue + ".jpg";
 }
 
 function search() {
