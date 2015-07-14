@@ -10,10 +10,9 @@
 .result_area .added_list td{
   text-align: center; padding: 10px 5px;
   border-bottom: 1px solid #e9e9e9;
-
 }
-.album_title, .album_name,
-.song_title, .song_name{
+.result_area .added_list td .album_title,
+.result_area .added_list td .song_title{
   text-align: left;
 }
 .result_area .added_list td .song_title{

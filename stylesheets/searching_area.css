@@ -1,3 +1,4 @@
+/* 검색 영역 */
 .searching_area {
   position: fixed; top: 0; left: 0;
   transition: background .2s;
@@ -23,6 +24,7 @@
   border: none; box-shadow: none; outline: none;
 }
 
+/* 검색결과 창 */
 .searching_area .ridi_songs_table {
   display: none; height: 100%; width: 50%;
   margin: 0 auto; overflow-y: scroll;
@@ -31,15 +33,29 @@
 .searching_area .ridi_songs_table .ridi_song_tbody{
   width: 100%;
 }
+.searching_area .ridi_songs_table tr{
+  transition: background .2s;
+}
+.searching_area .ridi_songs_table tr:hover{
+  background: rgba(0,0,0,.2);
+}
 .searching_area .ridi_songs_table th,
 .searching_area .ridi_songs_table td{
   color: white;
+}
+.searching_area .ridi_songs_table td{
+  padding: 5px 0;
+}
+.searching_area .ridi_songs_table td .album_name,
+.searching_area .ridi_songs_table td .song_name{
+  text-align: left;
 }
 .searching_area .ridi_songs_table
 .searching_area .ridi_songs_table .ridi_add_button {
   margin-top: -6px; cursor: pointer;
 }
 
+/* 검색결과 창 활성화 상태 */
 .searching_area.on{
   width: 100%; height: 100%;
   background: rgba(0,0,0,.9);
