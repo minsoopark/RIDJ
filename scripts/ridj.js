@@ -38,7 +38,7 @@ function getList(){
         var tmpRow = structureRow.clone();
         if(data.orders[i].cover_src == "" || data.orders[i].cover_src == undefined || data.orders[i].cover_src == null) {
           tmpRow.find('.cover_column').addClass("image_null");
-          tmpRow.find('.cover_column').html('No Image')
+          tmpRow.find('.cover_column').html("<span class='icon-sad'></span><p>No Image</p>");
         }
         else {
           tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
