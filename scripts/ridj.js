@@ -66,7 +66,7 @@ function search() {
       var imgSrc = makeCoverSrc(songs[i].albumId);
       var songId = songs[i].songId;
       var albumId = songs[i].albumId;
-      var artistId = songs[i].artistId;
+      var artistId = songs[i].artists.artist[0].artistId;
       tmpRow.find('.album_cover').attr('src', imgSrc);
       tmpRow.find('.song_name').html(songName);
       tmpRow.find('.album_name').html(albumName);
