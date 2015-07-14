@@ -1,148 +1,148 @@
 .searching_area {
-    position: fixed;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transition: background .2s;
+  .ridi_search_form {
+    padding: 25px 0;
     width: 100%;
-    top: 0;
-    left: 0;
-    transition: background .2s;
-    .ridi_search_form {
-        padding: 25px 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+    // background: rgba(255, 255, 255, .9);
+    transition: all .1s;
+    .search_input_wrap {
+      position: relative;
+      max-width: 740px;
+      margin: 0 auto;
+      .icon-openq {
+        position: absolute;
+        left: -20px;
+        font-size: 20px;
+        color: black;
+        transition: color .2s;
+      }
+      .ridi_search_field {
         width: 100%;
-        margin: 0 auto;
+        padding: 20px;
         box-sizing: border-box;
+        border: none;
+        font-size: 20px;
+        color: #333;
+        background: white;
+        font-weight: 300;
+        box-shadow: 0 1px 3px rgba(0,0,0,.3);
+        transition: all .15s;
         text-align: center;
-        // background: rgba(255, 255, 255, .9);
-        transition: all .1s;
-        .search_input_wrap {
-            position: relative;
-            max-width: 740px;
-            margin: 0 auto;
-            .icon-openq {
-                position: absolute;
-                left: -20px;
-                font-size: 20px;
-                color: black;
-                transition: color .2s;
-            }
-            .ridi_search_field {
-                width: 100%;
-                padding: 20px;
-                box-sizing: border-box;
-                border: none;
-                font-size: 20px;
-                color: #333;
-                background: white;
-                font-weight: 300;
-                box-shadow: 0 1px 3px rgba(0,0,0,.3);
-                transition: all .15s;
-                text-align: center;
-            }
-            .ridi_search_field:focus {
-                border: none;
-                box-shadow: none;
-                outline: none;
-            }
-            .clear_button {
-                position: absolute;
-                top: 0;
-                right: 0;
-                cursor: pointer;
-                -webkit-appearance: none;
-                border: none;
-                background: transparent;
-                display: none;
-                .close_icon {
-                    color: white;
-                    line-height: 70px;
-                    font-size: 30px;
-                }
-            }
-        }
-    }
-    .ridi_songs_table {
+      }
+      .ridi_search_field:focus {
+        border: none;
+        box-shadow: none;
+        outline: none;
+      }
+      .clear_button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        -webkit-appearance: none;
+        border: none;
+        background: transparent;
         display: none;
-        height: 100%;
-        max-width: 740px;
-        margin: 0 auto;
-        overflow-y: scroll;
-        border-collapse: collapse;
-        padding: 40px 0 0;
-        .ridi_song_tbody {
-            width: 100%;
+        .close_icon {
+          color: white;
+          line-height: 70px;
+          font-size: 30px;
         }
-        tr {
-            transition: all .1s;
-            cursor: pointer;
-            opacity: 0.8;
-        }
-        tr:hover {
-            background: rgba(255,255,255,.2);
-            opacity: 1;
-        }
-        td {
-            padding: 5px 10px;
-        }
-        img {
-            width: 50px;
-        }
-        .song_name {
-            font-weight: 700;
-        }
-        .album_name {
-            font-weight: 300;
-        }
-
-        .ridi_add_button {
-            width: 30px;
-            height: 30px;
-            margin-top: -6px;
-            transition: background .2s;
-            border-radius: 15px;
-            cursor: pointer;
-            border: 2px solid #fff;
-            -webkit-appearance: none;
-            background: transparent;
-            .icon-plus_1 {
-                font-size: 20px;
-                color: white;
-                transition: color .2s;
-            }
-        }
-        tr:hover .ridi_add_button,
-        .ridi_add_button:hover {
-            background: white;
-            .icon-plus_1 {
-                color: black;
-            }
-        }
+      }
     }
+  }
+  .ridi_songs_table {
+    display: none;
+    height: 100%;
+    max-width: 740px;
+    margin: 0 auto;
+    overflow-y: scroll;
+    border-collapse: collapse;
+    padding: 40px 0 0;
+    .ridi_song_tbody {
+      width: 100%;
+    }
+    tr {
+      transition: all .1s;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    tr:hover {
+      background: rgba(255,255,255,.2);
+      opacity: 1;
+    }
+    td {
+      padding: 5px 10px;
+    }
+    img {
+      width: 50px;
+    }
+    .song_name {
+      font-weight: 700;
+    }
+    .album_name {
+      font-weight: 300;
+    }
+
+    .ridi_add_button {
+      width: 30px;
+      height: 30px;
+      margin-top: -6px;
+      transition: background .2s;
+      border-radius: 15px;
+      cursor: pointer;
+      border: 2px solid #fff;
+      -webkit-appearance: none;
+      background: transparent;
+      .icon-plus_1 {
+        font-size: 20px;
+        color: white;
+        transition: color .2s;
+      }
+    }
+    tr:hover .ridi_add_button,
+    .ridi_add_button:hover {
+      background: white;
+      .icon-plus_1 {
+        color: black;
+      }
+    }
+  }
 }
 .searching_area .ridi_songs_table th,.searching_area .ridi_songs_table td {
-    color: white;
+  color: white;
 }
 .searching_area .ridi_songs_table td .album_name,.searching_area .ridi_songs_table td .song_name {
-    text-align: left;
+  text-align: left;
 }
 .searching_area.on {
-    height: 100%;
-    background: rgba(0,0,0,.9);
-    .ridi_search_form {
+  height: 100%;
+  background: rgba(0,0,0,.9);
+  .ridi_search_form {
+    background: transparent;
+    // border-bottom: 1px solid rgba(255,255,255,.5);
+    .search_input_wrap {
+      .icon-openq {
+        color: white;
+      }
+      .ridi_search_field {
+        color: white;
         background: transparent;
-        // border-bottom: 1px solid rgba(255,255,255,.5);
-        .search_input_wrap {
-            .icon-openq {
-                color: white;
-            }
-            .ridi_search_field {
-                color: white;
-                background: transparent;
-                font-size: 30px;
-            }
-            .clear_button {
-                display: block;
-            }
-        }
-    }
-    .ridi_songs_table {
+        font-size: 30px;
+      }
+      .clear_button {
         display: block;
+      }
     }
+  }
+  .ridi_songs_table {
+    display: block;
+  }
 }
