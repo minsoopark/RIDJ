@@ -18,10 +18,17 @@ function makeCoverSrc(idValue){
   return "http://image.melon.co.kr/cm/album/images/" + firstQuery + "/" + secondQuery + "/" + thirdQuery + "/" + idValue + ".jpg";
 }
 
-// 검색창 초기화 함수
+// 검색창 열기 함수
+function openSearch() {
+  $(".searching_trigger").addClass("on");
+  $('.searching_area').addClass("on");  
+}
+
+// 검색창 닫기 함수
 function clearSearch() {
   $(".ridi_search_field").val("");
   $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
+  $(".searching_trigger").removeClass("on");
   $(".searching_area").removeClass("on");
 }
 
@@ -127,15 +134,14 @@ function search() {
 }
 
 $(function () {
-  $(".ridi_search_field").focus(function() {
-    $('.searching_area').addClass("on");
+  $(".searching_trigger").click(function() {
+    $(this).hasClass("on") ? clearSearch() : openSearch();
   });
   $(".searching_area").click(function() {
     if($(event.target).is(".searching_area.on")) {
       clearSearch();
     }
   });
-  $(".search_input_wrap .clear_button").click(clearSearch);
 
   $(".ridi_search_field").on("keypress", function (e) {
     if (e.which == 13) {

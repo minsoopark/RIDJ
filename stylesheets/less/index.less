@@ -12,3 +12,25 @@
 .modal-spinner .ridi-spinner{ top: 50%; margin-top: -14px; }
 
 .structure_row{ display: none; }
+
+.searching_trigger{
+  position: fixed; top: 10px; right: 10px;
+  width: 60px; height: 60px; cursor: pointer; z-index: 999;
+  border-radius: 30px; border: none; -webkit-appearnce: none;
+  background: #1F8EE6; box-shadow: 1px 1px 4px rgba(0, 0, 0,.5);
+  transition: background .2s;
+  .icon-search, .icon-close_3{
+    font-size: 35px; color: white; 
+  }
+  .icon-close_3{
+    display: none;
+  }
+  &.on{
+    background: none; box-shadow: none;
+    .icon-search{ display: none; }
+    .icon-close_3{ display: block; } 
+  }
+  &:focus, &:active{
+    border: none; outline: none;
+  }
+}
