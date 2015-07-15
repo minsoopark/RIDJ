@@ -41,11 +41,11 @@ function clearSearch() {
 
 // 리스트 가져오는 함수
 function getList(){
+  $('.added_list_body').find('tr:not(.structure_row)').remove();
   $.ajax({
     url: "http://ridj.herokuapp.com/api/orders",
     success: function(data) {
       // 리스트 바인딩
-      $('.added_list_body').find('tr:not(.structure_row)').remove();
       var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
       for(var i=0; i<data.orders.length; i++){
         var playTime = calculateTime(data.orders[i].play_time);
@@ -158,12 +158,12 @@ $(function () {
     }
   });
   $(".search_more").click(searchMore);
-
   $(".ridi_search_field").on("keypress", function (e) {
     if (e.which == 13) {
       search("");
     }
   });
+  $(".logo").click(getList);
   
   getList();
 });
