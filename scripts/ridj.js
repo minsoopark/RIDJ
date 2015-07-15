@@ -1,3 +1,8 @@
+var datas = {
+  searchPage: 1,
+  searchKeyword: ""
+}
+
 // 값 관련 함수들
 function zeroPad(nr, base) {
   var len = (String(base).length - String(nr).length) + 1;
@@ -144,12 +149,6 @@ function searchMore() {
 }
 
 $(function () {
-  window.datas = {
-    searchPage: 1,
-    searchKeyword: "",
-    imgTestResult: true
-  }
-
   $(".searching_trigger").click(function() {
     $(this).hasClass("on") ? clearSearch() : openSearch();
   });
