@@ -3,12 +3,11 @@
     position: static;
   }
   .top_navigation{
-    position: fixed; height: 50px; width: 100%; top: 0; left: 0;
+    position: fixed; height: 0; width: 100%; top: 0; left: 0;
     text-align: right; z-index: 999;
     .searching_trigger{
-      position: static; width: 50px; height: 100%; cursor: pointer;
-      box-shadow: none; 
-      border-radius: 0;
+      position: static; width: 60px; height: 60px; cursor: pointer;
+      box-shadow: none; border-radius: 0;
       .icon-search, .icon-close_3{
         font-size: 20px;
       }
@@ -25,7 +24,6 @@
     }//.searching_trigger
   }//.top_navigation
   .searching_area{
-    padding-top: 80px;
     .ridi_search_form{
       .search_input_wrap{
         .ridi_search_field{
@@ -43,7 +41,7 @@
     }//.ridi_songs_table
   }//.searching_area
   .result_area{
-    padding-top: 0px; padding-left: 10px;
+    padding: 0;
     .added_list{
       td{
         font-size: 12px;
@@ -55,6 +53,7 @@
           }
         }//.cover_column
         &.title_column{
+          padding-left: 0;
           .song_title{ font-size: 14px; }
           .album_title{ font-size: 12px; }
         }//.title_column
