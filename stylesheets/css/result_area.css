@@ -1,6 +1,10 @@
 .result_area {
+  height: 100%;
   max-width: 740px;
   margin: 0 auto;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .result_area .added_list {
   width: 100%;

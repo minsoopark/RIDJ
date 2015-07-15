@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
 }
+body {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
 .modal-spinner {
   position: absolute;
   width: 100%;

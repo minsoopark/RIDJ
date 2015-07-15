@@ -31,30 +31,32 @@
           <input class="ridi_search_field" type="text" id="song" placeholder="+ 아티스트 혹은 곡 이름으로 검색" />
         </div>
       </div>
-      <table class="ridi_songs_table">
-        <colgroup>
-          <col width="50px">
-          <col width="auto">
-          <col width="20%">
-          <col width="10%">
-          <col width="5%">
-        </colgroup>
-        <tbody class="ridi_songs_tbody">
-          <tr class='ridi_songs_result structure_row'>
-            <td>
-              <img src="" alt="" class="album_cover" />
-            </td>
-            <td>
-              <p class="song_name"></p>
-              <p class='album_name'></p>
-            <td class='artist_name'></td>
-            <td class='play_time'></td>
-            <td>
-              <button class='ridi_add_button'><span class="icon-plus_1"></span></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="search_scrolling_area">
+        <table class="ridi_songs_table">
+          <colgroup>
+            <col width="50px">
+            <col width="auto">
+            <col width="20%">
+            <col width="10%">
+            <col width="5%">
+          </colgroup>
+          <tbody class="ridi_songs_tbody">
+            <tr class='ridi_songs_result structure_row'>
+              <td>
+                <img src="" alt="" class="album_cover" />
+              </td>
+              <td>
+                <p class="song_name"></p>
+                <p class='album_name'></p>
+              <td class='artist_name'></td>
+              <td class='play_time'></td>
+              <td>
+                <button class='ridi_add_button'><span class="icon-plus_1"></span></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section class="result_area">

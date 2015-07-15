@@ -19,46 +19,48 @@
       }
     }
   }
-  .ridi_songs_table {
-    height: 100%; max-width: 740px;
-    padding: 40px 0 0; margin: 0 auto; overflow-y: scroll;
-    border-collapse: collapse; border-spacing: 0;
-    display: none;
-    .ridi_songs_tbody {
-      width: 100%;
-      tr {
-        transition: all .1s; cursor: pointer; opacity: 0.8;
-        td {
-          padding: 5px 10px; color: white;
-          img { width: 50px; }
-          .song_name, .album_name{
-            text-align: left;
-          }
-          .song_name { font-weight: 700; }
-          .album_name { font-weight: 300; }
-          .ridi_add_button {
-            width: 30px; height: 30px; margin-top: -6px; transition: background .2s;
-            background: transparent; border: 2px solid #fff;
-            -webkit-appearance: none; cursor: pointer; border-radius: 15px;
-            .icon-plus_1 {
-              font-size: 20px; color: white; transition: color .2s;
+  .search_scrolling_area {
+    height: 75%;
+    overflow-y: scroll; -webkit-overflow-scrolling: touch;
+    .ridi_songs_table {
+      max-width: 740px; padding: 40px 0 0; margin: 0 auto;
+      border-collapse: collapse; border-spacing: 0;
+      display: none;
+      .ridi_songs_tbody {
+        width: 100%;
+        tr {
+          transition: all .1s; cursor: pointer; opacity: 0.8;
+          td {
+            padding: 5px 10px; color: white;
+            img { width: 50px; }
+            .song_name, .album_name{
+              text-align: left;
             }
-            &:hover{
+            .song_name { font-weight: 700; }
+            .album_name { font-weight: 300; }
+            .ridi_add_button {
+              width: 30px; height: 30px; margin-top: -6px; transition: background .2s;
+              background: transparent; border: 2px solid #fff;
+              -webkit-appearance: none; cursor: pointer; border-radius: 15px;
+              .icon-plus_1 {
+                font-size: 20px; color: white; transition: color .2s;
+              }
+              &:hover{
+                background: white;
+                .icon-plus_1{ color: black; }
+              }
+            }//.ridi_add_button
+          }//td
+          &:hover {
+            background: rgba(255,255,255,.2); opacity: 1;
+            .ridi_add_button{
               background: white;
-              .icon-plus_1{ color: black; }
-            }
-          }//.ridi_add_button
-        }//td
-        &:hover {
-          background: rgba(255,255,255,.2); opacity: 1;
-          .ridi_add_button{
-            background: white;
-            .icon-plus_1{ color: black; } 
-          }//.ridi_add_button
-        }//&:hover
-      }//tr
-    }//.ridi_song_tbody
-
+              .icon-plus_1{ color: black; } 
+            }//.ridi_add_button
+          }//&:hover
+        }//tr
+      }//.ridi_song_tbody
+    }//.search_scrolling_area
   }
 }
 .searching_area.on {
