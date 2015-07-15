@@ -72,6 +72,7 @@ function search(type) {
   var count = 11;
   if(type != "more") {
     $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
+    datas.searchPage = 1;
     datas.searchKeyword = $(".ridi_search_field").val();
   }
   $.ajax({
