@@ -3,6 +3,11 @@
 	font-family: 'tablet-gothic-wide', 'Apple SD Gothic Neo',Helvetica,arial,'나눔고딕','Nanum Gothic','돋움',Dotum,Tahoma,Geneva,sans-serif;
 	margin: 0; padding: 0;
 }
+button{
+  &:focus, &:active{
+    border: none; outline: none;
+  }
+}
 body{
   overflow-y: scroll; -webkit-overflow-scrolling: touch;
   background: #2c3e50;
@@ -20,13 +25,14 @@ header {
 	position: fixed; left: 0; top: 0;
 	padding: 15px;
 	.logo {
-		display: inline-block;
-		color: #bdc3c7;
-		border: 3px solid #bdc3c7;
-		padding: 3px 8px;
-		font-size: 30px;
-		vertical-align: middle;
+		display: inline-block; padding: 3px 8px;
+		border: 3px solid #bdc3c7; vertical-align: middle;
+		font-size: 30px; color: #bdc3c7;
 		font-family: "mono45-headline", sans-serif;
+    transition: background .2s, color .2s, font-size .2s;
+    &:hover{
+      background: #bdc3c7; color: #2C3E4F;
+    }
 	}
 	.description {
 		display: block;
@@ -43,9 +49,9 @@ header {
     width: 60px; height: 60px; cursor: pointer; z-index: 999;
     border-radius: 30px; border: none; -webkit-appearnce: none;
     background: transparent;
-    transition: background .2s;
+    transition: transform .2s;
     .icon-plus_1, .icon-close_3{
-      font-size: 35px; color: white; opacity: 0.9;
+      font-size: 35px; color: white; opacity: 0.85;
       transition: all .1s;
       &:hover {
       	opacity: 1;
@@ -56,9 +62,12 @@ header {
       background: none; box-shadow: none;
       .icon-plus_1{ display: none; }
       .icon-close_3{ display: block; } 
+      &:hover{
+        transform: rotate(0deg); text-shadow: 0 0 2px;
+      }
     }
-    &:focus, &:active{
-      border: none; outline: none;
+    &:hover{
+      transform: rotate(90deg);
     }
   }
 }

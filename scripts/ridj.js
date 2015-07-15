@@ -62,18 +62,26 @@ function getList(){
 }
 
 // 검색 함수
-function search() {
-  $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
-
-  var page = 1, count = 10, searchKeyword = $(".ridi_search_field").val();
-
+function search(type) {
+  var count = 11;
+  if(type != "more") {
+    $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
+    datas.searchKeyword = $(".ridi_search_field").val();
+  }
   $.ajax({
-    url: "http://ridj.herokuapp.com/api/search?&page=" + page + "&count=" + count + "&search_keyword=" + searchKeyword,
+    url: "http://ridj.herokuapp.com/api/search?&page=" + datas.searchPage + "&count=" + count + "&search_keyword=" + datas.searchKeyword,
     dataType: "json"
   }).done(function (data) {
     var songs = data.melon.songs.song;
     var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
-    for (var i = 0; i < songs.length ; i++) {
+    if( songs.length == 11 ) {
+      var maxLength = 10;
+      $('.search_more').addClass('active');
+    } else {
+      var maxLength = songs.length;
+      $('.search_more').removeClass('active');
+    }
+    for (var i = 0; i < maxLength ; i++) {
       var tmpRow = structureRow.clone();
       // 데이터 바인딩
       var songName = songs[i].songName;
@@ -84,6 +92,7 @@ function search() {
       var songId = songs[i].songId;
       var albumId = songs[i].albumId;
       var artistId = songs[i].artists.artist[0].artistId;
+      
       tmpRow.find('.album_cover').attr('src', imgSrc);
       tmpRow.find('.song_name').html(songName);
       tmpRow.find('.album_name').html(albumName);
@@ -128,7 +137,18 @@ function search() {
   });
 }
 
+function searchMore() {
+  datas.searchPage += 1;
+  search("more");
+}
+
 $(function () {
+  window.datas = {
+    searchPage: 1,
+    searchKeyword: "",
+    imgTestResult: true
+  }
+
   $(".searching_trigger").click(function() {
     $(this).hasClass("on") ? clearSearch() : openSearch();
   });
@@ -137,10 +157,11 @@ $(function () {
       clearSearch();
     }
   });
+  $(".search_more").click(searchMore);
 
   $(".ridi_search_field").on("keypress", function (e) {
     if (e.which == 13) {
-      search();
+      search("");
     }
   });
   

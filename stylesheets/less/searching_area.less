@@ -40,7 +40,14 @@
           transition: all .1s; cursor: pointer; opacity: 0.8;
           td {
             padding: 5px 6px; color: #34495e;
-            img { width: 50px; display: block;}
+            &.cover_column{
+              text-align: center;
+              .album_cover{ width: 50px; display: block;}
+              &.image_null{
+                height: 50px; font-size: 20px; color: #888;
+                p{ font-size: 12px; }
+              }
+            }
             .song_name, .album_name{
               text-align: left;
             }
@@ -67,9 +74,17 @@
             }//.ridi_add_button
           }//&:hover
         }//tr
-      }//.ridi_song_tbody
-    }//.search_scrolling_area
-  }
+      }//.ridi_songs_tbody
+    }//.ridi_songs_table
+    .search_more{
+      display: none; max-width: 740px; width: 90%; margin: 10px auto; padding: 10px 0;
+      font-size: 18px; color: #ECF0F1; cursor: pointer;
+      -webkit-appearance: none; border: none;
+      border-bottom: 3px solid #95a5a6; background: #9fb3b4;
+      &:hover{ border-bottom: 1px solid #95a5a6; border-top: 2px solid #ECF0F1; }
+      &.active{ display: block; }
+    }
+  }//.search_scrolling_area
 }
 .searching_area.on {
     visibility: visible;
