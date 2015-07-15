@@ -65,17 +65,11 @@ function getList(){
 function search() {
   $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
 
-  var version = 1, page = 1, count = 10, searchKeyword = $(".ridi_search_field").val();
+  var page = 1, count = 10, searchKeyword = $(".ridi_search_field").val();
 
   $.ajax({
-    url: "http://apis.skplanetx.com/melon/songs?version=" + version + "&page=" + page + "&count=" + count + "&searchKeyword=" + searchKeyword,
-    dataType: "json",
-    headers: {
-      "appKey": "9aefbb17-3d67-3069-a732-e03e4bb3b40c",
-      "Accept-Language": "ko",
-      "Accept": "application/json",
-      "Content-Type": "application/xml; charset=utf-8"
-    }
+    url: "http://ridj.herokuapp.com/api/search?&page=" + page + "&count=" + count + "&search_keyword=" + searchKeyword,
+    dataType: "json"
   }).done(function (data) {
     var songs = data.melon.songs.song;
     var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
