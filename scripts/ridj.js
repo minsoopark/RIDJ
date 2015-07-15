@@ -31,6 +31,7 @@ function clearSearch() {
   $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
   $(".searching_trigger").removeClass("on");
   $(".searching_area").removeClass("on");
+  $('.search_more').removeClass('active');
 }
 
 // 리스트 가져오는 함수
