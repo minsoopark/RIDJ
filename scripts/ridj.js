@@ -35,7 +35,7 @@ function clearSearch() {
 // 리스트 가져오는 함수
 function getList(){
   $.ajax({
-    url: "http://ridj.herokuapp.com/orders",
+    url: "http://ridj.herokuapp.com/api/orders",
     success: function(data) {
       // 리스트 바인딩
       $('.added_list_body').find('tr:not(.structure_row)').remove();
