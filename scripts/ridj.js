@@ -68,6 +68,17 @@ function getList(){
   });
 }
 
+function getCurrent() {
+  $.ajax({
+    url: "http://ridj.herokuapp.com/api/current",
+    success: function(data) {
+      var song = data.current.song;
+      var artist = data.current.artist;
+      $('.description').append('<br><br>Now playing..<br>♬ ' + artist + '-' + song);
+    }
+  });
+}
+
 // 검색 함수
 function search(type) {
   var count = 11;
@@ -170,4 +181,5 @@ $(function () {
   $(".logo").click(getList);
   
   getList();
+  getCurrent();
 });
