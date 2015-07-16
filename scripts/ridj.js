@@ -92,6 +92,7 @@ function search(type) {
     for (var i = 0; i < maxLength ; i++) {
       var tmpRow = structureRow.clone();
       // 데이터 바인딩
+      var indexNo = Number((datas.searchPage-1)*10) + i;
       var songName = songs[i].songName;
       var artistName = songs[i].artists.artist[0].artistName;
       var albumName = songs[i].albumName;
@@ -100,54 +101,55 @@ function search(type) {
       var songId = songs[i].songId;
       var albumId = songs[i].albumId;
       var artistId = songs[i].artists.artist[0].artistId;
-      
+
       tmpRow.find('.album_cover').attr('src', imgSrc);
       tmpRow.find('.song_name').html(songName);
       tmpRow.find('.album_name').html(albumName);
       tmpRow.find('.artist_name').html(artistName);
       tmpRow.find('.play_time').html(playTime).val(songs[i].playTime);
-      tmpRow.find('.ridi_add_button').attr('id', 'button-' + i);
-      tmpRow.attr('id', 'list-' + i).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
+      tmpRow.find('.ridi_add_button').attr('id', 'button-' + indexNo).val(indexNo).click(addSong);
+      tmpRow.attr('id', 'list-' + indexNo).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
 
       $(".ridi_songs_tbody").append(tmpRow);
-
-      // 추가 버튼 액션
-      $("#button-" + i).on("click", function () {
-        var index = this.id.replace("button-", "");
-        var addedTarget = $('#list-' + index);
-        songName = addedTarget.find('.song_name').text();
-        artistName = addedTarget.find('.artist_name').text();
-        albumName = addedTarget.find('.album_name').text();
-        playTime = addedTarget.find('.play_time').val();
-        songId = addedTarget.attr('song_id');
-        albumId = addedTarget.attr('album_id');
-        artistId = addedTarget.attr('artist_id');
-        coverSrc = addedTarget.find('.album_cover').attr('src');
-
-        var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
-        requestData += "&song_id=" + songId + "&album_id=" + albumId + "&artist_id=" + artistId + "&cover_src=" + coverSrc;
-        $.ajax({
-          url: "http://ridj.herokuapp.com/api/orders/new",
-          dataType: "json",
-          method: "POST",
-          data: requestData,
-          beforeSend: function () {
-            $(".modal-spinner").css("display", "table-cell");
-          }
-        }).done(function (data) {
-          $(".modal-spinner").css("display", "none");
-          alert("곡이 신청되었습니다.");
-          clearSearch();
-          getList();
-        });
-      });
     }
   });
 }
 
+// 추가 검색 함수
 function searchMore() {
   datas.searchPage += 1;
   search("more");
+}
+
+// 곡 추가 함수
+function addSong() {
+  var index = this.value;
+  var addedTarget = $('#list-' + index);
+  songName = addedTarget.find('.song_name').text();
+  artistName = addedTarget.find('.artist_name').text();
+  albumName = addedTarget.find('.album_name').text();
+  playTime = addedTarget.find('.play_time').val();
+  songId = addedTarget.attr('song_id');
+  albumId = addedTarget.attr('album_id');
+  artistId = addedTarget.attr('artist_id');
+  coverSrc = addedTarget.find('.album_cover').attr('src');
+
+  var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
+  requestData += "&song_id=" + songId + "&album_id=" + albumId + "&artist_id=" + artistId + "&cover_src=" + coverSrc;
+  $.ajax({
+    url: "http://ridj.herokuapp.com/api/orders/new",
+    dataType: "json",
+    method: "POST",
+    data: requestData,
+    beforeSend: function () {
+      $(".modal-spinner").css("display", "table-cell");
+    }
+  }).done(function (data) {
+    $(".modal-spinner").css("display", "none");
+    alert("곡이 신청되었습니다.");
+    clearSearch();
+    getList();
+  });
 }
 
 $(function () {
