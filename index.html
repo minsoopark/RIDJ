@@ -18,10 +18,6 @@
     <title>RI.DJ</title>
   </head>
   <body>
-    <!-- spinner -->
-    <div class="modal-spinner">
-      <div class="ridi_spinner mdl-spinner mdl-js-spinner is-active"></div>
-    </div>
     <header>
       <div class="logo">RI.DJ</div>
       <span class="description">Your Music.<br>Already Tuned.</span>
@@ -32,6 +28,12 @@
         <span class="icon-close_3"></span>
       </button>
     </nav>
+    
+    <!-- spinner -->
+    <div class="modal-spinner">
+      <img class="list_image" src="images/indicator.gif" alt="로딩중...">
+    </div>
+
     <!-- searching_area -->
     <section class="searching_area">
       <div class="ridi_search_form">
@@ -93,5 +95,13 @@
         </tbody> 
       </table>
     </section>
+    <footer>
+      <div class="playing_song_wrapper">
+        <span class="icon-music_1"></span>
+        Now playing..<br>
+        <p class="song_playing"></p>
+        <small>[<span class="song_playing_artist"></span>]</small>
+      </div>
+    </footer>
   </body>
 </html>

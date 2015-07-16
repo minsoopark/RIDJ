@@ -45,36 +45,43 @@ function getList(){
   $('.added_list_body').find('tr:not(.structure_row)').remove();
   $.ajax({
     url: "http://ridj.herokuapp.com/api/orders",
+    beforeSend: function(){
+      $('.modal-spinner').show();
+    },
     success: function(data) {
-      // 리스트 바인딩
-      var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
-      for(var i=0; i<data.orders.length; i++){
-        var playTime = calculateTime(data.orders[i].play_time);
-        var tmpRow = structureRow.clone();
-        if(data.orders[i].cover_src == "" || data.orders[i].cover_src == undefined || data.orders[i].cover_src == null) {
-          tmpRow.find('.cover_column').addClass("image_null");
-          tmpRow.find('.cover_column').html("<span class='icon-sad'></span><p>No Image</p>");
-        }
-        else {
-          tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
-        }
-        tmpRow.find('.song_title').html(data.orders[i].song);
-        tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
-        tmpRow.find('.artist').html(data.orders[i].artist);
-        tmpRow.find('.play_time').html(playTime);
-        $('.added_list_body').append(tmpRow);
+      $('.modal-spinner').hide();
+    }
+  }).done(function(data) {
+    // 리스트 바인딩
+    var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
+    for(var i=0; i<data.orders.length; i++){
+      var playTime = calculateTime(data.orders[i].play_time);
+      var tmpRow = structureRow.clone();
+      if(data.orders[i].cover_src == "" || data.orders[i].cover_src == undefined || data.orders[i].cover_src == null) {
+        tmpRow.find('.cover_column').addClass("image_null");
+        tmpRow.find('.cover_column').html("<span class='icon-sad'></span><p>No Image</p>");
       }
+      else {
+        tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
+      }
+      tmpRow.find('.song_title').html(data.orders[i].song);
+      tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
+      tmpRow.find('.artist').html(data.orders[i].artist);
+      tmpRow.find('.play_time').html(playTime);
+      $('.added_list_body').append(tmpRow);
     }
   });
 }
 
 function getCurrent() {
+  var ingWrapper = $('.playing_song_wrapper');
   $.ajax({
     url: "http://ridj.herokuapp.com/api/current",
     success: function(data) {
       var song = data.current.song;
       var artist = data.current.artist;
-      $('.description').append('<br><br>Now playing..<br>♬ ' + song + '<br><small>[' + artist + ']</small>');
+      ingWrapper.find('.song_playing').html(song);
+      ingWrapper.find('.song_playing_artist').html(artist);
     }
   });
 }
@@ -89,7 +96,13 @@ function search(type) {
   }
   $.ajax({
     url: "http://ridj.herokuapp.com/api/search?&page=" + datas.searchPage + "&count=" + count + "&search_keyword=" + datas.searchKeyword,
-    dataType: "json"
+    dataType: "json",
+    beforeSend: function() {
+      $('.modal-spinner').show();
+    },
+    success: function() {
+      $('.modal-spinner').hide();
+    }
   }).done(function (data) {
     var songs = data.melon.songs.song;
     var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
@@ -168,7 +181,7 @@ $(function () {
     Typekit.load();
   } catch(e) {}
   vex.defaultOptions.className = 'vex-theme-default';
-  
+
   $(".searching_trigger").click(function() {
     $(this).hasClass("on") ? clearSearch() : openSearch();
   });
