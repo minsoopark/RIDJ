@@ -74,7 +74,7 @@ function getCurrent() {
     success: function(data) {
       var song = data.current.song;
       var artist = data.current.artist;
-      $('.description').append('<br><br>Now playing..<br>♬ ' + artist + ' - ' + song);
+      $('.description').append('<br><br>Now playing..<br>♬ ' + song + '<br><small>[' + artist + ']</small>');
     }
   });
 }
