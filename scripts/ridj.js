@@ -16,10 +16,11 @@ function calculateTime(time){
 
 function makeCoverSrc(idValue){
   var idString = ("" + idValue);
-  var idLength = idString.length;
-  var firstQuery = zeroPad(idString.substring(0, idLength - 5), 100);
-  var secondQuery = idString.substring(idLength - 5, idLength - 3);
-  var thirdQuery = idString.substring(idLength - 3, idLength);
+  var padded = zeroPad(idString, 10000000);
+  var idLength = padded.length;
+  var firstQuery = padded.substring(0, idLength - 5);
+  var secondQuery = padded.substring(idLength - 5, idLength - 3);
+  var thirdQuery = padded.substring(idLength - 3, idLength);
   return "http://image.melon.co.kr/cm/album/images/" + firstQuery + "/" + secondQuery + "/" + thirdQuery + "/" + idValue + ".jpg";
 }
 
