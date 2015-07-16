@@ -157,13 +157,18 @@ function addSong() {
     }
   }).done(function (data) {
     $(".modal-spinner").css("display", "none");
-    alert("곡이 신청되었습니다.");
+    vex.dialog.alert("곡이 신청되었습니다.");
     clearSearch();
     getList();
   });
 }
 
 $(function () {
+  try {
+    Typekit.load();
+  } catch(e) {}
+  vex.defaultOptions.className = 'vex-theme-default';
+  
   $(".searching_trigger").click(function() {
     $(this).hasClass("on") ? clearSearch() : openSearch();
   });
