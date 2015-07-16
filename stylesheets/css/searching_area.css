@@ -1,2 +1,159 @@
-.searching_area{position:fixed;width:100%;height:100%;top:0;left:0;visibility:hidden;opacity:.01;background:#ecf0f1;transition:all .15s ease}.searching_area .ridi_search_form{width:100%;padding:0;margin:0 auto;box-sizing:border-box;text-align:center;transition:all .1s;background:transparent}.searching_area .ridi_search_form .search_input_wrap{position:relative;max-width:740px;margin:30px auto 0}.searching_area .ridi_search_form .search_input_wrap .ridi_search_label{text-align:center;font-size:14px;color:#95a5a6;font-weight:700}.searching_area .ridi_search_form .search_input_wrap .ridi_search_field{width:100%;padding:25px 0;box-sizing:border-box;color:#364c62;font-size:30px;font-weight:300;text-align:center;background:transparent;border:0}.searching_area .ridi_search_form .search_input_wrap .ridi_search_field::-webkit-input-placeholder{color:#bdc3c7}.searching_area .ridi_search_form .search_input_wrap .ridi_search_field:focus{border:0;box-shadow:none;outline:0}.searching_area .search_scrolling_area{height:75%;overflow-y:scroll;-webkit-overflow-scrolling:touch}.searching_area .search_scrolling_area .ridi_songs_table{max-width:740px;padding:40px 0 0;margin:0 auto;border-collapse:collapse;border-spacing:0;display:none}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody{width:100%}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr{transition:all .1s;cursor:pointer;opacity:.8}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td{padding:5px 6px;color:#34495e}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column{text-align:center}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column .album_cover{width:50px;display:block}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column.image_null{height:50px;font-size:20px;color:#888}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column.image_null p{font-size:12px}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .song_name,.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .album_name{text-align:left}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .song_name{font-weight:700}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .album_name{font-weight:300}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .ridi_add_button{width:30px;height:30px;margin-top:-6px;transition:background .2s;background:transparent;border:2px solid #34495e;-webkit-appearance:none;cursor:pointer;border-radius:15px;margin-left:6px}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .ridi_add_button .icon-plus_1{font-size:20px;color:#34495e;transition:color .2s}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.artist_name,.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.play_time{font-size:14px}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr:hover{background:#fff}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr:hover .ridi_add_button{background:#34495e}.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr:hover .ridi_add_button .icon-plus_1{color:#ecf0f1}.searching_area .search_scrolling_area .search_more{display:none;max-width:740px;width:90%;margin:10px auto;padding:10px 0;font-size:18px;color:#ECF0F1;cursor:pointer;-webkit-appearance:none;border:0;border-bottom:3px solid #95a5a6;background:#9fb3b4}.searching_area .search_scrolling_area .search_more:hover{border-bottom:1px solid #95a5a6;border-top:2px solid #ECF0F1}.searching_area .search_scrolling_area .search_more.active{display:block}.searching_area.on{visibility:visible;opacity:1}.searching_area.on .ridi_songs_table{display:block}
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
+.searching_area {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0.01;
+  background: #ecf0f1;
+  transition: all .15s ease;
+}
+.searching_area .ridi_search_form {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  transition: all .1s;
+  background: transparent;
+}
+.searching_area .ridi_search_form .search_input_wrap {
+  position: relative;
+  max-width: 740px;
+  margin: 30px auto 0;
+}
+.searching_area .ridi_search_form .search_input_wrap .ridi_search_label {
+  text-align: center;
+  font-size: 14px;
+  color: #95a5a6;
+  font-weight: 700;
+}
+.searching_area .ridi_search_form .search_input_wrap .ridi_search_field {
+  width: 100%;
+  padding: 25px 0;
+  box-sizing: border-box;
+  color: #364c62;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+  background: transparent;
+  border: none;
+}
+.searching_area .ridi_search_form .search_input_wrap .ridi_search_field::-webkit-input-placeholder {
+  color: #bdc3c7;
+}
+.searching_area .ridi_search_form .search_input_wrap .ridi_search_field:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+.searching_area .search_scrolling_area {
+  height: 75%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.searching_area .search_scrolling_area .ridi_songs_table {
+  max-width: 740px;
+  padding: 40px 0 0;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: none;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody {
+  width: 100%;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr {
+  transition: all .1s;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td {
+  padding: 5px 6px;
+  color: #34495e;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column {
+  text-align: center;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column .album_cover {
+  width: 50px;
+  display: block;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column.image_null {
+  height: 50px;
+  font-size: 20px;
+  color: #888;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.cover_column.image_null p {
+  font-size: 12px;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .song_name,
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .album_name {
+  text-align: left;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .song_name {
+  font-weight: 700;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .album_name {
+  font-weight: 300;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .ridi_add_button {
+  width: 30px;
+  height: 30px;
+  margin-top: -6px;
+  transition: background .2s;
+  background: transparent;
+  border: 2px solid #34495e;
+  -webkit-appearance: none;
+  cursor: pointer;
+  border-radius: 15px;
+  margin-left: 6px;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td .ridi_add_button .icon-plus_1 {
+  font-size: 20px;
+  color: #34495e;
+  transition: color .2s;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.artist_name,
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr td.play_time {
+  font-size: 14px;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr:hover {
+  background: white;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr:hover .ridi_add_button {
+  background: #34495e;
+}
+.searching_area .search_scrolling_area .ridi_songs_table .ridi_songs_tbody tr:hover .ridi_add_button .icon-plus_1 {
+  color: #ecf0f1;
+}
+.searching_area .search_scrolling_area .search_more {
+  display: none;
+  max-width: 740px;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px 0;
+  font-size: 18px;
+  color: #ECF0F1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  border: none;
+  border-bottom: 3px solid #95a5a6;
+  background: #9fb3b4;
+}
+.searching_area .search_scrolling_area .search_more:hover {
+  border-bottom: 1px solid #95a5a6;
+  border-top: 2px solid #ECF0F1;
+}
+.searching_area .search_scrolling_area .search_more.active {
+  display: block;
+}
+.searching_area.on {
+  visibility: visible;
+  opacity: 1;
+  z-index: 15;
+}
+.searching_area.on .ridi_songs_table {
+  display: block;
+}

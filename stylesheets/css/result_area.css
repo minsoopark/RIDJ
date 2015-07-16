@@ -1,2 +1,60 @@
-.result_area{height:100%;max-width:740px;margin:15px auto;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch}.result_area .added_list{width:100%;border-spacing:0;border-collapse:collapse}.result_area .added_list td{text-align:center;padding:10px 5px;border-bottom:1px solid #364c62;color:#bdc3c7}.result_area .added_list td .artist{font-size:14px}.result_area .added_list td.cover_column{padding:0}.result_area .added_list td.cover_column .album_cover{height:80px;vertical-align:top}.result_area .added_list td.cover_column.image_null{height:80px;font-size:20px;color:#888}.result_area .added_list td.cover_column.image_null p{font-size:12px}.result_area .added_list td.title_column{text-align:left;padding-left:15px}.result_area .added_list td.title_column .icon-music_1{padding-right:5px;font-size:13px;vertical-align:-9%}.result_area .added_list td.title_column .song_title{font-size:18px;font-weight:300;color:#ecf0f1}.result_area .added_list td.title_column .album_title{font-size:13px;font-weight:300;padding-top:5px}.result_area .added_list td.artist,.result_area .added_list td.play_time{font-size:14px}
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
+.result_area {
+  height: 100%;
+  max-width: 740px;
+  margin: 15px auto;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.result_area .added_list {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.result_area .added_list td {
+  text-align: center;
+  padding: 10px 5px;
+  border-bottom: 1px solid #364c62;
+  color: #bdc3c7;
+}
+.result_area .added_list td .artist {
+  font-size: 14px;
+}
+.result_area .added_list td.cover_column {
+  padding: 0;
+}
+.result_area .added_list td.cover_column .album_cover {
+  height: 80px;
+  vertical-align: top;
+}
+.result_area .added_list td.cover_column.image_null {
+  height: 80px;
+  font-size: 20px;
+  color: #888;
+}
+.result_area .added_list td.cover_column.image_null p {
+  font-size: 12px;
+}
+.result_area .added_list td.title_column {
+  text-align: left;
+  padding-left: 15px;
+}
+.result_area .added_list td.title_column .icon-music_1 {
+  padding-right: 5px;
+  font-size: 13px;
+  vertical-align: -9%;
+}
+.result_area .added_list td.title_column .song_title {
+  font-size: 18px;
+  font-weight: 300;
+  color: #ecf0f1;
+}
+.result_area .added_list td.title_column .album_title {
+  font-size: 13px;
+  font-weight: 300;
+  padding-top: 5px;
+}
+.result_area .added_list td.artist,
+.result_area .added_list td.play_time {
+  font-size: 14px;
+}
