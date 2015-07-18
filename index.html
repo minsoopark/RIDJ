@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="stylesheet" href="stylesheets/icon-font.css">
-    <link rel="stylesheet" href="stylesheets/vex/vex.css">
-    <link rel="stylesheet" href="stylesheets/vex/vex-theme-default.css">
+    <link rel="stylesheet" href="stylesheets/css/toastr.css">
     <link rel="stylesheet" href="stylesheets/css/index.css">
     <link rel="stylesheet" href="stylesheets/css/searching_area.css">
     <link rel="stylesheet" href="stylesheets/css/result_area.css">
@@ -14,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
     <script src="//use.typekit.net/mlj8akx.js"></script>
     <script src="scripts/vex.combined.min.js"></script>
+    <script src="scripts/toastr.min.js"></script>
     <script src="scripts/ridj.js"></script>
     <title>RI.DJ</title>
   </head>
@@ -68,7 +68,7 @@
           </tbody>
         </table>
 
-        <button type="button" class="search_more">10개 더 검색</button>
+        <button type="button" class="search_more">10개 더 검색...</button>
       </div>
     </section>
 
@@ -97,10 +97,11 @@
     </section>
     <footer>
       <div class="playing_song_wrapper">
-        <span class="icon-music_1"></span>
-        Now playing..
+        <div class="now_playing">
+          <span class="icon-music_1"></span>
+          Now playing..</div>
         <p class="song_playing"></p>
-        <p>[<span class="song_playing_artist"></span>]</p>
+        <p><span class="song_playing_artist"></span></p>
       </div>
     </footer>
   </body>

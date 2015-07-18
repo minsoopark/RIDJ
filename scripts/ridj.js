@@ -28,6 +28,7 @@ function makeCoverSrc(idValue){
 function openSearch() {
   $(".searching_trigger").addClass("on");
   $('.searching_area').addClass("on");
+  $('body').addClass("search_on");
   setTimeout(function(){$('#song').focus()}, 400);
 }
 
@@ -38,6 +39,7 @@ function clearSearch() {
   $(".searching_trigger").removeClass("on");
   $(".searching_area").removeClass("on");
   $('.search_more').removeClass('active');
+  $('body').removeClass("search_on");
 }
 
 // 리스트 가져오는 함수
@@ -126,13 +128,15 @@ function search(type) {
       var albumId = songs[i].albumId;
       var artistId = songs[i].artists.artist[0].artistId;
 
+      tmpRow.attr('song_index', indexNo);
       tmpRow.find('.album_cover').attr('src', imgSrc);
       tmpRow.find('.song_name').html(songName);
       tmpRow.find('.album_name').html(albumName);
       tmpRow.find('.artist_name').html(artistName);
       tmpRow.find('.play_time').html(playTime).val(songs[i].playTime);
-      tmpRow.find('.ridi_add_button').attr('id', 'button-' + indexNo).val(indexNo).click(addSong);
+      tmpRow.find('.ridi_add_button').attr('id', 'button-' + indexNo).val(indexNo);
       tmpRow.attr('id', 'list-' + indexNo).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
+      tmpRow.click(addSong);
 
       $(".ridi_songs_tbody").append(tmpRow);
     }
@@ -147,7 +151,7 @@ function searchMore() {
 
 // 곡 추가 함수
 function addSong() {
-  var index = this.value;
+  var index = $(this).attr('song_index');
   var addedTarget = $('#list-' + index);
   songName = addedTarget.find('.song_name').text();
   artistName = addedTarget.find('.artist_name').text();
@@ -170,7 +174,7 @@ function addSong() {
     }
   }).done(function (data) {
     $(".modal-spinner").css("display", "none");
-    vex.dialog.alert("곡이 신청되었습니다.");
+    toastr.success("곡이 신청되었습니다.");
     clearSearch();
     getList();
   });
@@ -197,6 +201,13 @@ $(function () {
     }
   });
   $(".logo").click(getList);
+  $('.search_scrolling_area').scroll(function(){
+    if($(this).scrollTop() >= 10) {
+      $(this).parent().addClass('scrolled');
+    } else {
+      $(this).parent().removeClass('scrolled');
+    }
+  });
   
   getList();
   getCurrent();

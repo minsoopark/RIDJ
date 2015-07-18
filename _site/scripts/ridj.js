@@ -1,3 +1,8 @@
+var datas = {
+  searchPage: 1,
+  searchKeyword: ""
+}
+
 // 값 관련 함수들
 function zeroPad(nr, base) {
   var len = (String(base).length - String(nr).length) + 1;
@@ -11,10 +16,11 @@ function calculateTime(time){
 
 function makeCoverSrc(idValue){
   var idString = ("" + idValue);
-  var idLength = idString.length;
-  var firstQuery = zeroPad(idString.substring(0, idLength - 5), 100);
-  var secondQuery = idString.substring(idLength - 5, idLength - 3);
-  var thirdQuery = idString.substring(idLength - 3, idLength);
+  var padded = zeroPad(idString, 10000000);
+  var idLength = padded.length;
+  var firstQuery = padded.substring(0, idLength - 5);
+  var secondQuery = padded.substring(idLength - 5, idLength - 3);
+  var thirdQuery = padded.substring(idLength - 3, idLength);
   return "http://image.melon.co.kr/cm/album/images/" + firstQuery + "/" + secondQuery + "/" + thirdQuery + "/" + idValue + ".jpg";
 }
 
@@ -22,6 +28,7 @@ function makeCoverSrc(idValue){
 function openSearch() {
   $(".searching_trigger").addClass("on");
   $('.searching_area').addClass("on");
+  $('body').addClass("search_on");
   setTimeout(function(){$('#song').focus()}, 400);
 }
 
@@ -31,57 +38,87 @@ function clearSearch() {
   $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
   $(".searching_trigger").removeClass("on");
   $(".searching_area").removeClass("on");
+  $('.search_more').removeClass('active');
+  $('body').removeClass("search_on");
 }
 
 // 리스트 가져오는 함수
 function getList(){
+  $('.added_list_body').find('tr:not(.structure_row)').remove();
   $.ajax({
     url: "http://ridj.herokuapp.com/api/orders",
+    beforeSend: function(){
+      $('.modal-spinner').show();
+    },
     success: function(data) {
-      // 리스트 바인딩
-      $('.added_list_body').find('tr:not(.structure_row)').remove();
-      var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
-      for(var i=0; i<data.orders.length; i++){
-        var playTime = calculateTime(data.orders[i].play_time);
-        var tmpRow = structureRow.clone();
-        if(data.orders[i].cover_src == "" || data.orders[i].cover_src == undefined || data.orders[i].cover_src == null) {
-          tmpRow.find('.cover_column').addClass("image_null");
-          tmpRow.find('.cover_column').html("<span class='icon-sad'></span><p>No Image</p>");
-        }
-        else {
-          tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
-        }
-        tmpRow.find('.song_title').html(data.orders[i].song);
-        tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
-        tmpRow.find('.artist').html(data.orders[i].artist);
-        tmpRow.find('.play_time').html(playTime);
-        $('.added_list_body').append(tmpRow);
+      $('.modal-spinner').hide();
+    }
+  }).done(function(data) {
+    // 리스트 바인딩
+    var structureRow = $('.added_list_body').find('.structure_row').clone().removeClass('structure_row');
+    for(var i=0; i<data.orders.length; i++){
+      var playTime = calculateTime(data.orders[i].play_time);
+      var tmpRow = structureRow.clone();
+      if(data.orders[i].cover_src == "" || data.orders[i].cover_src == undefined || data.orders[i].cover_src == null) {
+        tmpRow.find('.cover_column').addClass("image_null");
+        tmpRow.find('.cover_column').html("<span class='icon-sad'></span><p>No Image</p>");
       }
+      else {
+        tmpRow.find('.album_cover').attr('src', data.orders[i].cover_src);
+      }
+      tmpRow.find('.song_title').html(data.orders[i].song);
+      tmpRow.find('.album_title').html("[ " + data.orders[i].album + " ]");
+      tmpRow.find('.artist').html(data.orders[i].artist);
+      tmpRow.find('.play_time').html(playTime);
+      $('.added_list_body').append(tmpRow);
+    }
+  });
+}
+
+function getCurrent() {
+  var ingWrapper = $('.playing_song_wrapper');
+  $.ajax({
+    url: "http://ridj.herokuapp.com/api/current",
+    success: function(data) {
+      var song = data.current.song;
+      var artist = data.current.artist;
+      ingWrapper.find('.song_playing').html(song);
+      ingWrapper.find('.song_playing_artist').html(artist);
     }
   });
 }
 
 // 검색 함수
-function search() {
-  $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
-
-  var version = 1, page = 1, count = 10, searchKeyword = $(".ridi_search_field").val();
-
+function search(type) {
+  var count = 11;
+  if(type != "more") {
+    $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
+    datas.searchPage = 1;
+    datas.searchKeyword = $(".ridi_search_field").val();
+  }
   $.ajax({
-    url: "http://apis.skplanetx.com/melon/songs?version=" + version + "&page=" + page + "&count=" + count + "&searchKeyword=" + searchKeyword,
+    url: "http://ridj.herokuapp.com/api/search?&page=" + datas.searchPage + "&count=" + count + "&search_keyword=" + datas.searchKeyword,
     dataType: "json",
-    headers: {
-      "appKey": "9aefbb17-3d67-3069-a732-e03e4bb3b40c",
-      "Accept-Language": "ko",
-      "Accept": "application/json",
-      "Content-Type": "application/xml; charset=utf-8"
+    beforeSend: function() {
+      $('.modal-spinner').show();
+    },
+    success: function() {
+      $('.modal-spinner').hide();
     }
   }).done(function (data) {
     var songs = data.melon.songs.song;
     var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
-    for (var i = 0; i < songs.length ; i++) {
+    if( songs.length == 11 ) {
+      var maxLength = 10;
+      $('.search_more').addClass('active');
+    } else {
+      var maxLength = songs.length;
+      $('.search_more').removeClass('active');
+    }
+    for (var i = 0; i < maxLength ; i++) {
       var tmpRow = structureRow.clone();
       // 데이터 바인딩
+      var indexNo = Number((datas.searchPage-1)*10) + i;
       var songName = songs[i].songName;
       var artistName = songs[i].artists.artist[0].artistName;
       var albumName = songs[i].albumName;
@@ -90,51 +127,65 @@ function search() {
       var songId = songs[i].songId;
       var albumId = songs[i].albumId;
       var artistId = songs[i].artists.artist[0].artistId;
+
+      tmpRow.attr('song_index', indexNo);
       tmpRow.find('.album_cover').attr('src', imgSrc);
       tmpRow.find('.song_name').html(songName);
       tmpRow.find('.album_name').html(albumName);
       tmpRow.find('.artist_name').html(artistName);
       tmpRow.find('.play_time').html(playTime).val(songs[i].playTime);
-      tmpRow.find('.ridi_add_button').attr('id', 'button-' + i);
-      tmpRow.attr('id', 'list-' + i).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
+      tmpRow.find('.ridi_add_button').attr('id', 'button-' + indexNo).val(indexNo);
+      tmpRow.attr('id', 'list-' + indexNo).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
+      tmpRow.click(addSong);
 
       $(".ridi_songs_tbody").append(tmpRow);
-
-      // 추가 버튼 액션
-      $("#button-" + i).on("click", function () {
-        var index = this.id.replace("button-", "");
-        var addedTarget = $('#list-' + index);
-        songName = addedTarget.find('.song_name').text();
-        artistName = addedTarget.find('.artist_name').text();
-        albumName = addedTarget.find('.album_name').text();
-        playTime = addedTarget.find('.play_time').val();
-        songId = addedTarget.attr('song_id');
-        albumId = addedTarget.attr('album_id');
-        artistId = addedTarget.attr('artist_id');
-        coverSrc = addedTarget.find('.album_cover').attr('src');
-
-        var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
-        requestData += "&song_id=" + songId + "&album_id=" + albumId + "&artist_id=" + artistId + "&cover_src=" + coverSrc;
-        $.ajax({
-          url: "http://ridj.herokuapp.com/api/orders/new",
-          dataType: "json",
-          method: "POST",
-          data: requestData,
-          beforeSend: function () {
-            $(".modal-spinner").css("display", "table-cell");
-          }
-        }).done(function (data) {
-          $(".modal-spinner").css("display", "none");
-          alert("곡이 신청되었습니다.");
-          clearSearch();
-          getList();
-        });
-      });
     }
   });
 }
 
+// 추가 검색 함수
+function searchMore() {
+  datas.searchPage += 1;
+  search("more");
+}
+
+// 곡 추가 함수
+function addSong() {
+  var index = $(this).attr('song_index');
+  var addedTarget = $('#list-' + index);
+  songName = addedTarget.find('.song_name').text();
+  artistName = addedTarget.find('.artist_name').text();
+  albumName = addedTarget.find('.album_name').text();
+  playTime = addedTarget.find('.play_time').val();
+  songId = addedTarget.attr('song_id');
+  albumId = addedTarget.attr('album_id');
+  artistId = addedTarget.attr('artist_id');
+  coverSrc = addedTarget.find('.album_cover').attr('src');
+
+  var requestData = "song=" + songName + "&artist=" + artistName + "&album=" + albumName + "&play_time=" + playTime;
+  requestData += "&song_id=" + songId + "&album_id=" + albumId + "&artist_id=" + artistId + "&cover_src=" + coverSrc;
+  $.ajax({
+    url: "http://ridj.herokuapp.com/api/orders/new",
+    dataType: "json",
+    method: "POST",
+    data: requestData,
+    beforeSend: function () {
+      $(".modal-spinner").css("display", "table-cell");
+    }
+  }).done(function (data) {
+    $(".modal-spinner").css("display", "none");
+    toastr.success("곡이 신청되었습니다.");
+    clearSearch();
+    getList();
+  });
+}
+
 $(function () {
+  try {
+    Typekit.load();
+  } catch(e) {}
+  vex.defaultOptions.className = 'vex-theme-default';
+
   $(".searching_trigger").click(function() {
     $(this).hasClass("on") ? clearSearch() : openSearch();
   });
@@ -143,12 +194,21 @@ $(function () {
       clearSearch();
     }
   });
-
+  $(".search_more").click(searchMore);
   $(".ridi_search_field").on("keypress", function (e) {
     if (e.which == 13) {
-      search();
+      search("");
+    }
+  });
+  $(".logo").click(getList);
+  $('.search_scrolling_area').scroll(function(){
+    if($(this).scrollTop() >= 10) {
+      $(this).parent().addClass('scrolled');
+    } else {
+      $(this).parent().removeClass('scrolled');
     }
   });
   
   getList();
+  getCurrent();
 });

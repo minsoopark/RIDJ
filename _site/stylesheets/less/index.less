@@ -1,32 +1,31 @@
-// @import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
 * {
 	font-family: 'tablet-gothic-wide', 'Apple SD Gothic Neo',Helvetica,arial,'나눔고딕','Nanum Gothic','돋움',Dotum,Tahoma,Geneva,sans-serif;
 	margin: 0; padding: 0;
+}
+button{
+  &:focus, &:active{
+    border: none; outline: none;
+  }
 }
 body{
   overflow-y: scroll; -webkit-overflow-scrolling: touch;
   background: #2c3e50;
 }
-.modal-spinner{
- position: absolute; width: 100%; height: 100%;
- text-align: center; background-color: rgba(0, 0, 0, 0.2);
- z-index: 999; display: none;
+body.search_on {
+  overflow: hidden;
 }
-
-.modal-spinner .ridi-spinner{ top: 50%; margin-top: -14px; }
-
-.structure_row{ display: none; }
 header {
 	position: fixed; left: 0; top: 0;
 	padding: 15px;
 	.logo {
-		display: inline-block;
-		color: #bdc3c7;
-		border: 3px solid #bdc3c7;
-		padding: 3px 8px;
-		font-size: 30px;
-		vertical-align: middle;
+		display: inline-block; padding: 3px 8px;
+		border: 3px solid #bdc3c7; vertical-align: middle;
+		font-size: 30px; color: #bdc3c7; cursor: pointer;
 		font-family: "mono45-headline", sans-serif;
+    transition: background .2s, color .2s, font-size .2s;
+    &:hover{
+      background: #bdc3c7; color: #2C3E4F;
+    }
 	}
 	.description {
 		display: block;
@@ -37,15 +36,26 @@ header {
 		letter-spacing: 0.1em;
 	}
 }
+
+.modal-spinner{
+  position: fixed; width: 50px; height: 50px;
+  top: 50%; margin-top: -25px;
+  left: 50%; margin-left: -25px;
+  line-height: 63px; border-radius: 10px; z-index: 20;
+  text-align: center; background: rgba(255,255,255,.9);  
+  display: none;
+}
+.structure_row{ display: none; }
+
 .top_navigation{
   .searching_trigger{
-    position: fixed; top: 10px; right: 10px;
+    position: fixed; top: 0; right: 0;
     width: 60px; height: 60px; cursor: pointer; z-index: 999;
     border-radius: 30px; border: none; -webkit-appearnce: none;
     background: transparent;
-    transition: background .2s;
+    transition: transform .2s;
     .icon-plus_1, .icon-close_3{
-      font-size: 35px; color: white; opacity: 0.9;
+      font-size: 35px; color: white; opacity: 0.85;
       transition: all .1s;
       &:hover {
       	opacity: 1;
@@ -56,9 +66,36 @@ header {
       background: none; box-shadow: none;
       .icon-plus_1{ display: none; }
       .icon-close_3{ display: block; } 
+      &:hover{
+        transform: rotate(0deg); text-shadow: 0 0 2px;
+      }
     }
-    &:focus, &:active{
-      border: none; outline: none;
+    &:hover{
+      transform: rotate(90deg);
     }
   }
+}//.top_navigation
+footer{
+  position: fixed; width: 100%; bottom: 0; left: 0;
+  background-color: RGBA(44, 62, 80, .95);
+  .playing_song_wrapper{
+    max-width: 740px; width: 100%; margin: 0 auto; 
+    padding: 10px; color: #bdc3c7; box-sizing: border-box;
+    font-size: 13px;
+    .song_playing{ font-size: 15px; font-weight: bold; }
+    .song_playing_artist{ font-size: 14px; }
+  }
+}//footer
+
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.5);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  
 }

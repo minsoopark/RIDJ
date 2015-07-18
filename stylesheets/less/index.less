@@ -11,6 +11,9 @@ body{
   overflow-y: scroll; -webkit-overflow-scrolling: touch;
   background: #2c3e50;
 }
+body.search_on {
+  overflow: hidden;
+}
 header {
 	position: fixed; left: 0; top: 0;
 	padding: 15px;
@@ -83,3 +86,16 @@ footer{
     .song_playing_artist{ font-size: 14px; }
   }
 }//footer
+
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.5);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  
+}
