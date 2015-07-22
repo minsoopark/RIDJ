@@ -94,7 +94,7 @@ function search(type) {
   if(type != "more") {
     $(".ridi_songs_tbody").find('tr:not(.structure_row)').remove();
     datas.searchPage = 1;
-    datas.searchKeyword = $(".ridi_search_field").val();
+    datas.searchKeyword = encodeURI($(".ridi_search_field").val());
   }
   var url = "http://ridj.herokuapp.com/api/search?&page=" + datas.searchPage + "&count=" + count + "&search_keyword=" + datas.searchKeyword;
   if (navigator.userAgent.match(/msie/i) && window.XDomainRequest) {
