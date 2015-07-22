@@ -96,51 +96,71 @@ function search(type) {
     datas.searchPage = 1;
     datas.searchKeyword = $(".ridi_search_field").val();
   }
-  $.ajax({
-    url: "http://ridj.herokuapp.com/api/search?&page=" + datas.searchPage + "&count=" + count + "&search_keyword=" + datas.searchKeyword,
-    dataType: "json",
-    beforeSend: function() {
-      $('.modal-spinner').show();
-    },
-    success: function() {
-      $('.modal-spinner').hide();
-    }
-  }).done(function (data) {
-    var songs = data.melon.songs.song;
-    var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
-    if( songs.length == 11 ) {
-      var maxLength = 10;
-      $('.search_more').addClass('active');
-    } else {
-      var maxLength = songs.length;
-      $('.search_more').removeClass('active');
-    }
-    for (var i = 0; i < maxLength ; i++) {
-      var tmpRow = structureRow.clone();
-      // 데이터 바인딩
-      var indexNo = Number((datas.searchPage-1)*10) + i;
-      var songName = songs[i].songName;
-      var artistName = songs[i].artists.artist[0].artistName;
-      var albumName = songs[i].albumName;
-      var playTime = calculateTime(songs[i].playTime);
-      var imgSrc = makeCoverSrc(songs[i].albumId);
-      var songId = songs[i].songId;
-      var albumId = songs[i].albumId;
-      var artistId = songs[i].artists.artist[0].artistId;
+  var url = "http://ridj.herokuapp.com/api/search?&page=" + datas.searchPage + "&count=" + count + "&search_keyword=" + datas.searchKeyword;
+  if (navigator.userAgent.match(/msie/i) && window.XDomainRequest) {
+    // Use Microsoft XDR
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onload = function () {
+      //parse response as JSON
+      var JSON = $.parseJSON(xdr.responseText);
+      if (JSON == null || typeof (JSON) == 'undefined') {
+        JSON = $.parseJSON(data.firstChild.textContent);
+      }
+      processSearchResult(JSON);
+    };
+    xdr.send();
+  } else {
+    $.ajax({
+      url: url,
+      dataType: "json",
+      beforeSend: function() {
+        $('.modal-spinner').show();
+      },
+      success: function() {
+        $('.modal-spinner').hide();
+      }
+    }).done(function (data) {
+      processSearchResult(data);
+    });
+  }
+}
 
-      tmpRow.attr('song_index', indexNo);
-      tmpRow.find('.album_cover').attr('src', imgSrc);
-      tmpRow.find('.song_name').html(songName);
-      tmpRow.find('.album_name').html(albumName);
-      tmpRow.find('.artist_name').html(artistName);
-      tmpRow.find('.play_time').html(playTime).val(songs[i].playTime);
-      tmpRow.find('.ridi_add_button').attr('id', 'button-' + indexNo).val(indexNo);
-      tmpRow.attr('id', 'list-' + indexNo).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
-      tmpRow.click(addSong);
+function processSearchResult(data) {
+  var songs = data.melon.songs.song;
+  var structureRow = $('.ridi_songs_tbody').find('.structure_row').clone().removeClass('structure_row');
+  if( songs.length == 11 ) {
+    var maxLength = 10;
+    $('.search_more').addClass('active');
+  } else {
+    var maxLength = songs.length;
+    $('.search_more').removeClass('active');
+  }
+  for (var i = 0; i < maxLength ; i++) {
+    var tmpRow = structureRow.clone();
+    // 데이터 바인딩
+    var indexNo = Number((datas.searchPage-1)*10) + i;
+    var songName = songs[i].songName;
+    var artistName = songs[i].artists.artist[0].artistName;
+    var albumName = songs[i].albumName;
+    var playTime = calculateTime(songs[i].playTime);
+    var imgSrc = makeCoverSrc(songs[i].albumId);
+    var songId = songs[i].songId;
+    var albumId = songs[i].albumId;
+    var artistId = songs[i].artists.artist[0].artistId;
 
-      $(".ridi_songs_tbody").append(tmpRow);
-    }
-  });
+    tmpRow.attr('song_index', indexNo);
+    tmpRow.find('.album_cover').attr('src', imgSrc);
+    tmpRow.find('.song_name').html(songName);
+    tmpRow.find('.album_name').html(albumName);
+    tmpRow.find('.artist_name').html(artistName);
+    tmpRow.find('.play_time').html(playTime).val(songs[i].playTime);
+    tmpRow.find('.ridi_add_button').attr('id', 'button-' + indexNo).val(indexNo);
+    tmpRow.attr('id', 'list-' + indexNo).attr('song_id', songId).attr('album_id', albumId).attr('artist_id', artistId);
+    tmpRow.click(addSong);
+
+    $(".ridi_songs_tbody").append(tmpRow);
+  }
 }
 
 // 추가 검색 함수
