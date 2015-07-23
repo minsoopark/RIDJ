@@ -24,6 +24,7 @@
   padding: 0;
 }
 .result_area .added_list td.cover_column .album_cover {
+  width: 80px;
   height: 80px;
   vertical-align: top;
 }
