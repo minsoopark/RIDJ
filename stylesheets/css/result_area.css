@@ -1,7 +1,7 @@
 .result_area {
   height: 100%;
   max-width: 740px;
-  margin: 15px auto;
+  margin: 15px auto 90px auto;
   box-sizing: border-box;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
